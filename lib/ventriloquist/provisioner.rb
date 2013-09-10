@@ -31,6 +31,10 @@ module VagrantPlugins
         @logger.info("Checking for Docker installation...")
         @installer.ensure_installed
 
+        if @machine.guest.capability?(:ventriloquist_containers_upstart)
+          @machine.guest.capability(:ventriloquist_containers_upstart)
+        end
+
         unless @client.daemon_running?
           raise Vocker::Errors::DockerNotRunning
         end

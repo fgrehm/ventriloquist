@@ -75,6 +75,11 @@ module VagrantPlugins
         Cap::Debian::InstallBuildTools
       end
 
+      guest_capability("debian", "ventriloquist_containers_upstart") do
+        require_relative "cap/debian/ventriloquist_containers_upstart"
+        Cap::Debian::VentriloquistContainersUpstart
+      end
+
       guest_capability("linux", "download") do
         require_relative "cap/linux/download"
         Cap::Linux::Download
