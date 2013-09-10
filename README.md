@@ -52,7 +52,7 @@ and has only been tested on the following Ubuntu 13.04 Vagrant VMs using Docker
 _Please note that in order to use the plugin on [vagrant-lxc](https://github.com/fgrehm/vagrant-lxc)
 containers you need some extra steps described below_
 
-On its current state is a "somewhat stable experiment" as I've been using a setup with the 
+On its current state is a "somewhat stable experiment" as I've been using a setup with the
 plugin without issues for more than a week now.
 
 
@@ -188,15 +188,8 @@ Vagrant.configure("2") do |config|
   config.vm.provision :shell, inline: %[
     if ! [ -f /etc/default/lxc ]; then
       cat <<STR > /etc/default/lxc
-LXC_AUTO="true"
-USE_LXC_BRIDGE="true"
-LXC_BRIDGE="lxcbr0"
-LXC_ADDR="10.0.253.1"
-LXC_NETMASK="255.255.255.0"
-LXC_NETWORK="10.0.253.0/24"
-LXC_DHCP_RANGE="10.0.253.2,10.0.253.254"
-LXC_DHCP_MAX="253"
-LXC_SHUTDOWN_TIMEOUT=120
+LXC_AUTO="false"
+USE_LXC_BRIDGE="false"
 STR
     fi
   ]
