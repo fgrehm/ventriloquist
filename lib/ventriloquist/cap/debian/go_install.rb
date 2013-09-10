@@ -6,7 +6,6 @@ module VagrantPlugins
           def self.go_install(machine, version)
             return if machine.communicate.test('which go > /dev/null')
 
-            version ||= '1.1.2'
             src      = "https://go.googlecode.com/files/go#{version}.linux-amd64.tar.gz"
             bin_path = "/usr/local/go/bin"
             go_path  = "$HOME/go"

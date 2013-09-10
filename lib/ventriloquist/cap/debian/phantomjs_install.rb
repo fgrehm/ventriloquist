@@ -6,7 +6,6 @@ module VagrantPlugins
           def self.phantomjs_install(machine, version)
             return if machine.communicate.test('which phantomjs > /dev/null')
 
-            version ||= '1.9.1'
             src        = "https://phantomjs.googlecode.com/files/phantomjs-#{version}-linux-x86_64.tar.bz2"
             executable = "/usr/local/share/phantomjs-#{version}-linux-x86_64/bin/phantomjs"
 
