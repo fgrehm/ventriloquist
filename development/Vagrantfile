@@ -1,0 +1,45 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.require_plugin 'vagrant-lxc'
+Vagrant.require_plugin 'vagrant-cachier'
+Vagrant.require_plugin 'vagrant-pristine'
+Vagrant.require_plugin 'vagrant-global-status'
+Vagrant.require_plugin 'ventriloquist'
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "raring64"
+  config.vm.synced_folder "../", "/vagrant", id: 'vagrant-root'
+
+  config.vm.network :private_network, ip: "192.168.123.123"
+  config.vm.network :forwarded_port, guest: 8080, host: 8080
+
+  config.cache.auto_detect = true
+
+  config.vm.provider :lxc do |lxc|
+    # Required to boot nested containers
+    lxc.customize 'aa_profile', 'unconfined'
+  end
+
+  # Required to boot nested containers
+  config.vm.provision :shell, inline: %[
+    if ! [ -f /etc/default/lxc ]; then
+      cat <<STR > /etc/default/lxc
+LXC_AUTO="false"
+USE_LXC_BRIDGE="false"
+STR
+    fi
+  ]
+
+  config.vm.provision :ventriloquist do |env|
+    env.services << {
+      redis:         { image: 'fgrehm/ventriloquist-redis',         tag: 'latest' },
+      memcached:     { image: 'fgrehm/ventriloquist-memcached',     tag: 'latest' },
+      elasticsearch: { image: 'fgrehm/ventriloquist-elasticsearch', tag: 'latest' }
+    }
+    env.services << ['pg:9.1', 'mysql']
+
+    env.platforms << { ruby: { version: '2.0.0' } }
+    env.platforms << %w( nodejs phantomjs go:1.1.2 )
+  end
+end
