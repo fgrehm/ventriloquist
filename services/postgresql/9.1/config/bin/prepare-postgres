@@ -1,0 +1,27 @@
+#!/bin/bash
+
+set -e
+
+user=$1
+password=$2
+
+/etc/init.d/postgresql start
+
+su postgres -c "createuser --superuser ${user}"
+su postgres -c "createdb ${user}"
+su postgres -c "psql -c \"ALTER ROLE ${user} PASSWORD '${password}'\""
+
+# Based on https://gist.github.com/ffmike/877447
+su postgres -c "psql postgres -c \"update pg_database set datallowconn = TRUE where datname = 'template0';\""
+su postgres -c "psql template0 -c \"update pg_database set datistemplate = FALSE where datname = 'template1';\""
+su postgres -c "psql template0 -c \"drop database template1;\""
+su postgres -c "psql template0 -c \"create database template1 with template = template0 encoding = 'UTF8';\""
+su postgres -c "psql template0 -c \"update pg_database set datistemplate = TRUE where datname = 'template1';\""
+su postgres -c "psql template1 -c \"update pg_database set datallowconn = FALSE where datname = 'template0';\""
+
+/etc/init.d/postgresql stop
+
+# Avoid password for local connections
+echo 'host all all all trust' >> /etc/postgresql/9.1/main/pg_hba.conf
+# Allow connections from any IP
+echo "listen_addresses='*'" >> /etc/postgresql/9.1/main/postgresql.conf

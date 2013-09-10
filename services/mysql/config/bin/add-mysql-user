@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -e
+
+user=$1
+password=$2
+
+user='vagrant'
+password='vagrant'
+
+sed -i 's/127.0.0.1/0.0.0.0/' /etc/mysql/my.cnf
+
+mysqld& sleep 3
+
+mysqladmin -u root password $password
+
+echo "create user '${user}'@'%' identified by '${password}'" | mysql -u root -p$password
+echo "grant all on *.* to '${user}'@'%' with grant option" | mysql -u root -p$password
+echo "FLUSH PRIVILEGES;" | mysql -uroot -p${password}
