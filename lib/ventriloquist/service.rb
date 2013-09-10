@@ -10,6 +10,7 @@ module VagrantPlugins
       end
 
       def provision(machine)
+        machine.env.ui.info("Starting #{@name} service")
         machine.communicate.sudo("mkdir -p #{CONTAINER_IDS_PATH}")
         # Reduce network latency, see https://groups.google.com/d/msg/docker-user/Z3zQuRawIsE/2AEkl30WpTQJ
         # for more info
