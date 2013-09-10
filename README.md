@@ -52,8 +52,8 @@ and has only been tested on the following Ubuntu 13.04 Vagrant VMs using Docker
 _Please note that in order to use the plugin on [vagrant-lxc](https://github.com/fgrehm/vagrant-lxc)
 containers you need some extra steps described below_
 
-On its current state is mostly an experiment but I've got everything in place
-to start working using a setup with Ventriloquist on my day to day work.
+On its current state is a "somewhat stable experiment" as I've been using a setup with the 
+plugin without issues for more than a week now.
 
 
 ## Installation
