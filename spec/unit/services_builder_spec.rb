@@ -44,7 +44,7 @@ describe VagrantPlugins::Ventriloquist::ServicesBuilder do
   end
 
   it 'prepends "fgrehm/ventriloquist-" to image names if image config is not provided' do
-    expect(mysql.config[:image]).to eq('fgrehm/ventriloquist-mysql')
+    expect(mysql.config[:image]).to eq('fgrehm/ventriloquist-mysql:1.2')
   end
 
   it 'sets the service name' do

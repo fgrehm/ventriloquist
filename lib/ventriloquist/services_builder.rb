@@ -45,8 +45,10 @@ module VagrantPlugins
       def create_service_provisioner(name, config, docker_client)
         name, tag = name.to_s.split(':')
 
+        # REFACTOR: This is a bit confusing...
         config[:tag]   ||= (tag || 'latest')
         config[:image] ||= extract_image_name(name)
+        config[:image] << ":#{config[:tag]}"
 
         klass = @mapping.fetch(name, Service)
         klass.new(name, config, docker_client)
