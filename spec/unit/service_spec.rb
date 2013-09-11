@@ -10,7 +10,9 @@ describe VagrantPlugins::Ventriloquist::Service do
 
   fake(:docker_client)
   fake(:communicator) { VagrantPlugins::CommunicatorSSH::Communicator }
-  let(:machine)       { fake(:machine, communicate: communicator) }
+  fake(:ui)           { Vagrant::UI::Interface }
+  let(:env)           { fake(:environment, ui: ui) }
+  let(:machine)       { fake(:machine, communicate: communicator, env: env) }
 
   let(:service_name) { 'dbserver' }
   let(:service_conf) { { image: 'user/dbserver', tag: 'latest' } }
