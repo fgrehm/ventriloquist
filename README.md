@@ -23,8 +23,8 @@ for development on [Discourse](http://www.discourse.org/):
 Vagrant.configure("2") do |config|
   config.vm.box = "quantal64"
   config.vm.provision :ventriloquist do |env|
-    env.services  = %w( redis pg:9.1 )
-    env.platforms = %w( nodejs ruby:1.9.3 )
+    env.services  << %w( redis pg:9.1 )
+    env.platforms << %w( nodejs ruby:1.9.3 )
   end
 end
 ```
@@ -40,6 +40,7 @@ end
   languages / tools.
 
 
+
 ## Status
 
 Early development, the feature set and configuration format might change rapidly
@@ -52,8 +53,9 @@ and has only been tested on the following Ubuntu 13.04 Vagrant VMs using Docker
 _Please note that in order to use the plugin on [vagrant-lxc](https://github.com/fgrehm/vagrant-lxc)
 containers you need some extra steps described below_
 
-On its current state is a "somewhat stable experiment" as I've been using a setup with the
+On its current state is an "stable experiment", I've been using a setup with the
 plugin without issues for more than a week now.
+
 
 
 ## Installation
@@ -95,7 +97,7 @@ PostgreSQL will involve installing the `postgresql-client` package and adding an
 `export PGHOST=localhost` to the guest's `/etc/profiles.d/ventriloquist.sh` so that
 the `psql` client works without any extra params.
 
-Please note that all of the builtin images are available on the Docker registry
+Please note that all of the builtin images are available on the [Docker index](https://index.docker.io/)
 with the `fgrehm/ventriloquist-` prefix that is ommited on the table below:
 
 | Name          | Provides       | Notes |
