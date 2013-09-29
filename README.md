@@ -23,7 +23,7 @@ for development on [Discourse](http://www.discourse.org/):
 Vagrant.configure("2") do |config|
   config.vm.box = "quantal64"
   config.vm.provision :ventriloquist do |env|
-    env.services  << %w( redis pg:9.1 )
+    env.services  << %w( redis pg:9.1 mailcatcher )
     env.platforms << %w( nodejs ruby:1.9.3 )
   end
 end
@@ -108,6 +108,7 @@ with the `fgrehm/ventriloquist-` prefix that is ommited on the table below:
 | pg:9.1        | PostgreSQL 9.1 | Same as above |
 | mysql         | 5.5            | Runs on port 3306 and creates a `/home/vagrant/.my.conf`. It will also install the `mysql-client` and `libmysqlclient-dev` packages on the guest. |
 | redis         | 2.4.15         | Runs on port 6379 and installs / compiles the `redis-cli` excutable |
+| mailcatcher   | 0.5.12         | SMPT server runs on YYY and web interface on ZZZ |
 
 Since services are just Docker images, you can build your own image, push to the
 registry and use it on your Vagrantfile, you'll just need to specify its fully

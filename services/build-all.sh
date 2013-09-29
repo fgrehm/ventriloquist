@@ -18,3 +18,5 @@ docker build -t ${PREFIX}-elasticsearch elasticsearch
 docker build -t ${PREFIX}-memcached memcached
 
 docker build -t ${PREFIX}-redis redis
+
+docker build -t ${PREFIX}-mailcatcher mailcatcher
