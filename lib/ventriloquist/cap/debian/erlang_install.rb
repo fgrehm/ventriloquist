@@ -7,7 +7,7 @@ module VagrantPlugins
 
           def self.erlang_install(machine)
             machine.communicate.tap do |comm|
-              if ! comm.test('which erlang > /dev/null')
+              if ! comm.test('which erl > /dev/null')
                 machine.env.ui.info('Installing Erlang')
 
                 path = download_path(comm)
