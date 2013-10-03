@@ -14,6 +14,7 @@ docker build -t ${PREFIX}-mysql mysql
 
 docker build -t ${PREFIX}-openjdk7 openjdk7
 docker build -t ${PREFIX}-elasticsearch elasticsearch
+docker build -t ${PREFIX}-solr solr
 
 docker build -t ${PREFIX}-memcached memcached
 
