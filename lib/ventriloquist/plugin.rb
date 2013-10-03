@@ -114,6 +114,11 @@ module VagrantPlugins
         require_relative "cap/linux/rvm_install_ruby"
         Cap::Linux::RvmInstallRuby
       end
+
+      guest_capability("debian", "erlang_install") do
+        require_relative "cap/debian/erlang_install"
+        Cap::Debian::ErlangInstall
+      end
     end
   end
 end

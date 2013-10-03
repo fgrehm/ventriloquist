@@ -45,6 +45,6 @@ STR
     env.services << ['pg:9.1', 'mysql']
 
     env.platforms << { ruby: { version: '2.0.0' } }
-    env.platforms << %w( nodejs phantomjs go:1.1.2 )
+    env.platforms << %w( nodejs phantomjs go:1.1.2 erlang)
   end
 end
