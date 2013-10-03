@@ -11,8 +11,8 @@ module VagrantPlugins
                 machine.env.ui.info('Installing Erlang')
 
                 path = download_path(comm)
-                unless comm.test("-f #{path}")
-                  machine.capability(:download, ERLANG_SOLUTIONS_PKG, path)
+                unless comm.test("test -f #{path}")
+                  machine.guest.capability(:download, ERLANG_SOLUTIONS_PKG, path)
                 end
                 comm.sudo("dpkg -i #{path}")
 
