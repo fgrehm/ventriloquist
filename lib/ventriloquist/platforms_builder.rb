@@ -3,6 +3,7 @@ require_relative 'platforms/ruby'
 require_relative 'platforms/nodejs'
 require_relative 'platforms/phantomjs'
 require_relative 'platforms/go'
+require_relative 'platforms/erlang'
 
 module VagrantPlugins
   module Ventriloquist
@@ -12,6 +13,7 @@ module VagrantPlugins
         'nodejs'    => Platforms::NodeJS,
         'phantomjs' => Platforms::PhantomJS,
         'go'        => Platforms::Go,
+        'erlang'    => Platforms::Erlang
       }
 
       def initialize(platforms, mapping = MAPPING)
