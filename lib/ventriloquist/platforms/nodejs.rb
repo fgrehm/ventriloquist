@@ -3,7 +3,11 @@ module VagrantPlugins
     module Platforms
       class NodeJS < Platform
         def provision(machine)
-          machine.guest.capability(:nodejs_install)
+          @config[:version] = '0.10' if @config[:version] == 'latest'
+          machine.guest.tap do |guest|
+            guest.capability(:nvm_install)
+            guest.capability(:nvm_install_nodejs, @config[:version])
+          end
         end
       end
     end
