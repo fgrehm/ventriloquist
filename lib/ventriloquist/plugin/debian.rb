@@ -41,11 +41,6 @@ module VagrantPlugins
         Cap::Debian::VentriloquistContainersUpstart
       end
 
-      guest_capability("debian", "nodejs_install") do
-        require_relative "../cap/debian/nodejs_install"
-        Cap::Debian::NodejsInstall
-      end
-
       guest_capability("debian", "phantomjs_install") do
         require_relative "../cap/debian/phantomjs_install"
         Cap::Debian::PhantomjsInstall

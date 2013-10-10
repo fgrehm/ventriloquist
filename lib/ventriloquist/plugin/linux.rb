@@ -35,6 +35,16 @@ module VagrantPlugins
         require_relative "../cap/linux/rvm_install_ruby"
         Cap::Linux::RvmInstallRuby
       end
+
+      guest_capability("linux", "nvm_install") do
+        require_relative "../cap/linux/nvm_install"
+        Cap::Linux::NvmInstall
+      end
+
+      guest_capability("linux", "nvm_install_nodejs") do
+        require_relative "../cap/linux/nvm_install_nodejs"
+        Cap::Linux::NvmInstallNodeJS
+      end
     end
   end
 end
