@@ -3,7 +3,6 @@
 FEATURES:
 
   - Erlang support [[GH-12]]
-  - Solr service [[GH-13]]
   - MailCatcher service [[GH-8]]
 
 BUG FIXES:
