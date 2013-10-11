@@ -148,6 +148,7 @@ Request with the scripts required to set things for other platforms:
 | go        | 1.1.2            |
 | nodejs    | Currently limited to the latest version available at https://launchpad.net/~chris-lea/+archive/node.js (0.10.17 as of this writing) |
 | phantomjs | 1.9.1            |
+| erlang    | Currently limited to the latest version available at https://packages.erlang-solutions.com/erlang/ (currently R16B02) |
 
 
 ## Ideas for improvements
