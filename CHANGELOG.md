@@ -1,5 +1,9 @@
 ## [0.2.1](https://github.com/fgrehm/ventriloquist/compare/v0.2.0...master) (unreleased)
 
+FEATURES:
+
+  - Make use of nvm for when installing nodejs, allowing installation of any nodejs version
+    instead of what's available at https://launchpad.net/~chris-lea/+archive/node.js [[GH-22]]
 
 ## [0.2.0](https://github.com/fgrehm/ventriloquist/compare/v0.1.0...v0.2.0) (October 3, 2013)
 
@@ -19,6 +23,6 @@ BUG FIXES:
 
 
 
+[GH-22]: https://github.com/fgrehm/ventriloquist/issues/22
 [GH-12]: https://github.com/fgrehm/ventriloquist/issues/12
-[GH-13]: https://github.com/fgrehm/ventriloquist/issues/13
 [GH-8]: https://github.com/fgrehm/ventriloquist/issues/8
