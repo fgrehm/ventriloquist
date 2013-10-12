@@ -90,9 +90,14 @@ module VagrantPlugins
         Cap::Linux::Untar
       end
 
-      guest_capability("debian", "nodejs_install") do
-        require_relative "cap/debian/nodejs_install"
-        Cap::Debian::NodejsInstall
+      guest_capability("linux", "nvm_install") do
+        require_relative "cap/linux/nvm_install"
+        Cap::Linux::NvmInstall
+      end
+
+      guest_capability("linux", "nvm_install_nodejs") do
+        require_relative "cap/linux/nvm_install_nodejs"
+        Cap::Linux::NvmInstallNodeJS
       end
 
       guest_capability("linux", "rvm_install") do
