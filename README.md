@@ -146,7 +146,7 @@ Request with the scripts required to set things for other platforms:
 | --------- | ---------------- |
 | ruby      | rvm + Ruby 2.0.0 |
 | go        | 1.1.2            |
-| nodejs    | Currently limited to the latest version available at https://launchpad.net/~chris-lea/+archive/node.js (0.10.17 as of this writing) |
+| nodejs    | nvm + Nodejs     |
 | phantomjs | 1.9.1            |
 | erlang    | Currently limited to the latest version available at https://packages.erlang-solutions.com/erlang/ (currently R16B02) |
 
