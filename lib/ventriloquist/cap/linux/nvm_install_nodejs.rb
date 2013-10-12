@@ -7,6 +7,7 @@ module VagrantPlugins
             if ! machine.communicate.test("nvm ls | grep #{version}")
               machine.env.ui.info("Installing NodeJS #{version}")
               machine.communicate.execute("nvm install #{version}")
+              machine.communicate.execute("nvm alias default #{version}")
             end
           end
         end
