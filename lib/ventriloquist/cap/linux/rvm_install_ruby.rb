@@ -6,7 +6,7 @@ module VagrantPlugins
           def self.rvm_install_ruby(machine, version)
             if ! machine.communicate.test("rvm list | grep #{version}")
               machine.env.ui.info("Installing Ruby #{version}")
-              machine.communicate.execute("rvm install #{version}")
+              machine.communicate.sudo("rvm install #{version}")
               # FIXME: THIS IS DEBIAN SPECIFIC
               machine.communicate.sudo("apt-get install -y libxslt1-dev")
             end
