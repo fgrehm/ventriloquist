@@ -1,5 +1,8 @@
 ## [0.2.2](https://github.com/fgrehm/ventriloquist/compare/v0.2.1...master) (unreleased)
 
+FEATURES:
+
+  - Install RVM globally [[GH-24]]
 
 ## [0.2.1](https://github.com/fgrehm/ventriloquist/compare/v0.2.0...v0.2.1) (October 12, 2013)
 
@@ -26,6 +29,7 @@ BUG FIXES:
 
 
 
+[GH-24]: https://github.com/fgrehm/ventriloquist/issues/24
 [GH-22]: https://github.com/fgrehm/ventriloquist/issues/22
 [GH-12]: https://github.com/fgrehm/ventriloquist/issues/12
 [GH-8]: https://github.com/fgrehm/ventriloquist/issues/8
