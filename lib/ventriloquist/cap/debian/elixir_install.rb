@@ -9,7 +9,7 @@ module VagrantPlugins
             @version = version
 
             machine.communicate.tap do |comm|
-              if ! comm.test('which iex')
+              if ! comm.test('which iex > /dev/null')
                 bin_path = "/usr/local/elixir/bin"
 
                 2.times { ELIXIR_PRECOMPILED["VERSION"] = @version }
