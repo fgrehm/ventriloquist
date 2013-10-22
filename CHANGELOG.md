@@ -3,6 +3,7 @@
 FEATURES:
 
   - Elixir support [[GH-3]]
+  - Python support [[GH-19]]
 
 IMPROVEMENTS:
 
@@ -33,6 +34,7 @@ BUG FIXES:
 
 
 
+[GH-19]: https://github.com/fgrehm/ventriloquist/issues/19
 [GH-3]: https://github.com/fgrehm/ventriloquist/issues/3
 [GH-22]: https://github.com/fgrehm/ventriloquist/issues/22
 [GH-12]: https://github.com/fgrehm/ventriloquist/issues/12
