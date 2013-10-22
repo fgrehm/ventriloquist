@@ -33,8 +33,8 @@ BUG FIXES:
 
 
 
-[vocker]: https://github.com/fgrehm/ventriloquist/issues/3
 [GH-3]: https://github.com/fgrehm/ventriloquist/issues/3
 [GH-22]: https://github.com/fgrehm/ventriloquist/issues/22
 [GH-12]: https://github.com/fgrehm/ventriloquist/issues/12
 [GH-8]: https://github.com/fgrehm/ventriloquist/issues/8
+[vocker]: https://github.com/fgrehm/vocker
