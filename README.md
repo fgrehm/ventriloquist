@@ -153,6 +153,7 @@ Request with the scripts required to set things for other platforms:
 | phantomjs | 1.9.1             |
 | erlang    | Currently limited to the latest version available at https://packages.erlang-solutions.com/erlang/ (currently R16B02) |
 | elixir    | 0.10.3            |
+| python    | pyenv + 3.3.2     |
 
 
 ## Ideas for improvements
