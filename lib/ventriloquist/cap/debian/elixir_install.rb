@@ -11,10 +11,10 @@ module VagrantPlugins
             machine.communicate.tap do |comm|
               if ! comm.test('which iex > /dev/null')
                 bin_path = "/usr/local/elixir/bin"
-
-                2.times { ELIXIR_PRECOMPILED["VERSION"] = @version }
+                ELIXIR_PRECOMPILED.gsub!(/VERSION/,@version)
 
                 machine.env.ui.info("Installing Elixir #{@version}")
+
                 path = download_path(comm)
 
                 unless comm.test("test -f #{path}")
@@ -35,10 +35,10 @@ module VagrantPlugins
 
           def self.download_path(comm)
             # If vagrant-cachier apt cache bucket is available, drop it there
-            if comm.test("test -d /tmp/vagrant-cache/apt")
-              "/tmp/vagrant-cache/apt/v#{@version}.zip"
+            if comm.test("test -d /tmp/vagrant-cache")
+              "/tmp/vagrant-cache/elixir-v#{@version}.zip"
             else
-              "/tmp/v#{@version}.zip"
+              "/tmp/elixir-v#{@version}.zip"
             end
           end
         end
