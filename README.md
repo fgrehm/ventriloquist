@@ -145,14 +145,14 @@ install 2.0.0 with the latest path level.
 So far I've only set up the stuff I need to work but feel free to submit a Pull
 Request with the scripts required to set things for other platforms:
 
-| Name      | Provides         |
-| --------- | ---------------- |
-| ruby      | rvm + Ruby 2.0.0 |
-| go        | 1.1.2            |
-| nodejs    | nvm + Nodejs     |
-| phantomjs | 1.9.1            |
+| Name      | Provides          |
+| --------- | ----------------- |
+| ruby      | rvm + Ruby 2.0.0  |
+| go        | 1.1.2             |
+| nodejs    | nvm + Nodejs 0.10 |
+| phantomjs | 1.9.1             |
 | erlang    | Currently limited to the latest version available at https://packages.erlang-solutions.com/erlang/ (currently R16B02) |
-| elixir    | 0.10.3           |
+| elixir    | 0.10.3            |
 
 
 ## Ideas for improvements
