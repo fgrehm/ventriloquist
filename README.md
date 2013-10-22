@@ -45,7 +45,7 @@ end
 
 Early development, the feature set and configuration format might change rapidly
 and has only been tested on the following Ubuntu 13.04 Vagrant VMs using Docker
-0.6.1 and Vagrant 1.2.7 / 1.3.0:
+0.6.1 and Vagrant 1.2.0+:
 
 * http://cloud-images.ubuntu.com/vagrant/raring/current/raring-server-cloudimg-amd64-vagrant-disk1.box
 * http://bit.ly/vagrant-lxc-raring64-2013-07-12 (yes! LXC inception :)
@@ -125,6 +125,9 @@ Vagrant.configure("2") do |config|
 end
 ```
 
+If for more information on creating / running Docker containers please have a look
+at [Vocker](https://github.com/fgrehm/vocker)'s documentation.
+
 
 ## Available platforms
 
@@ -149,6 +152,7 @@ Request with the scripts required to set things for other platforms:
 | nodejs    | nvm + Nodejs     |
 | phantomjs | 1.9.1            |
 | erlang    | Currently limited to the latest version available at https://packages.erlang-solutions.com/erlang/ (currently R16B02) |
+| elixir    | 0.10.3           |
 
 
 ## Ideas for improvements
