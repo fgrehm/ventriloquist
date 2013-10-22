@@ -124,6 +124,11 @@ module VagrantPlugins
         require_relative "cap/debian/erlang_install"
         Cap::Debian::ErlangInstall
       end
+
+      guest_capability("debian", "elixir_install") do
+        require_relative "cap/debian/elixir_install"
+        Cap::Debian::ElixirInstall
+      end
     end
   end
 end
