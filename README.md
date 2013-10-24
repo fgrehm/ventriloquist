@@ -44,8 +44,8 @@ end
 ## Status
 
 Early development, the feature set and configuration format might change rapidly
-and has only been tested on the following Ubuntu 13.04 Vagrant VMs using Docker
-0.6.1 and Vagrant 1.2.0+:
+and it is known to work with the following Ubuntu 13.04 Vagrant VMs using Docker
+0.6.1+ and Vagrant 1.2.0+:
 
 * http://cloud-images.ubuntu.com/vagrant/raring/current/raring-server-cloudimg-amd64-vagrant-disk1.box
 * http://bit.ly/vagrant-lxc-raring64-2013-07-12 (yes! LXC inception :)
@@ -53,8 +53,9 @@ and has only been tested on the following Ubuntu 13.04 Vagrant VMs using Docker
 _Please note that in order to use the plugin on [vagrant-lxc](https://github.com/fgrehm/vagrant-lxc)
 containers you need some extra steps described below_
 
-On its current state is an "stable experiment", I've been using a setup with the
-plugin without issues for more than a week now.
+On its current state is a "stable experiment", I've been using a setup with the
+plugin without hitting [major issues](https://github.com/fgrehm/ventriloquist/issues?labels=bug&page=1&state=open)
+for a while now.
 
 
 
