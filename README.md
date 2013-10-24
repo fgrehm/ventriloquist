@@ -197,8 +197,15 @@ Vagrant.configure("2") do |config|
   config.vm.provision :shell, inline: %[
     if ! [ -f /etc/default/lxc ]; then
       cat <<STR > /etc/default/lxc
-LXC_AUTO="false"
-USE_LXC_BRIDGE="false"
+LXC_AUTO="true"
+USE_LXC_BRIDGE="true"
+LXC_BRIDGE="lxcbr0"
+LXC_ADDR="10.0.252.1"
+LXC_NETMASK="255.255.255.0"
+LXC_NETWORK="10.0.252.0/24"
+LXC_DHCP_RANGE="10.0.252.2,10.0.252.254"
+LXC_DHCP_MAX="253"
+LXC_SHUTDOWN_TIMEOUT=120
 STR
     fi
   ]
