@@ -35,9 +35,9 @@ end
 * Multi purpose, "zero-conf" development environments that fits into a gist.
 * Production parity for those that have no control of their production machines,
   like if you are deploying to Heroku or another PaaS.
-* Be the easiest tool for building other tools development environments.
-* Be a learning playground for hackers, making it easy to learn new programming
-  languages / tools.
+* Be the easiest tool for building other tools development environments, for
+  prototyping and also to give a head start to those introducing Vagrant / Docker
+  to legacy projects.
 
 
 
