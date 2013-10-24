@@ -10,7 +10,7 @@ FEATURES:
 
 IMPROVEMENTS:
 
-  - Bump [[vocker]] dependency to 0.3.2
+  - Bump [vocker] dependency to 0.3.3
 
 ## [0.2.1](https://github.com/fgrehm/ventriloquist/compare/v0.2.0...v0.2.1) (October 12, 2013)
 
