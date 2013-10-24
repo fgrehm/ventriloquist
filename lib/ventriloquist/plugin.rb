@@ -129,6 +129,16 @@ module VagrantPlugins
         require_relative "cap/debian/elixir_install"
         Cap::Debian::ElixirInstall
       end
+
+      guest_capability("debian", "pyenv_install") do
+        require_relative "cap/debian/python"
+        Cap::Debian::Python
+      end
+
+      guest_capability("debian", "pyenv_install_python") do
+        require_relative "cap/debian/python"
+        Cap::Debian::Python
+      end
     end
   end
 end
