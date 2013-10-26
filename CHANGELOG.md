@@ -1,5 +1,10 @@
 ## [0.3.1](https://github.com/fgrehm/ventriloquist/compare/v0.3.0...master) (unreleased)
 
+BUG FIXES:
+
+  - Prevent upstart job from respawning all the time and fix issues related to
+    stopping containers [[GH-9]]
+
 
 ## [0.3.0](https://github.com/fgrehm/ventriloquist/compare/v0.2.1...v0.3.0) (October 23, 2013)
 
@@ -37,6 +42,7 @@ BUG FIXES:
 
 
 
+[GH-9]: https://github.com/fgrehm/ventriloquist/issues/9
 [GH-19]: https://github.com/fgrehm/ventriloquist/issues/19
 [GH-3]: https://github.com/fgrehm/ventriloquist/issues/3
 [GH-22]: https://github.com/fgrehm/ventriloquist/issues/22

@@ -11,17 +11,23 @@ module VagrantPlugins
 cat<<EOF > /etc/init/ventriloquist.conf
 description "Restart configured Ventriloquist services after reboot"
 
-start on (started docker)
+start on started docker
+
+task
 
 script
   if [ -d /var/lib/ventriloquist/cids ]; then
     sleep 1 # Give Docker some time
     for cidfile in \$(ls /var/lib/ventriloquist/cids/*); do
-      docker start \$(cat \$cidfile)
+      cid=\$(cat \$cidfile)
+      if ! $(docker ps | grep -q $cid); then
+        docker start \$(cat \$cidfile)
+      else
+        echo "Container ${cid} already started"
+      fi
     done
   fi
 end script
-respawn
 EOF'
               end
             end
