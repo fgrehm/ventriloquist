@@ -1,4 +1,7 @@
-## [0.3.2](https://github.com/fgrehm/ventriloquist/compare/v0.3.1...master) (October 28, 2013)
+## [0.3.3](https://github.com/fgrehm/ventriloquist/compare/v0.3.2...master) (unreleased)
+
+
+## [0.3.2](https://github.com/fgrehm/ventriloquist/compare/v0.3.1...v0.3.2) (October 28, 2013)
 
 BUG FIXES:
 
