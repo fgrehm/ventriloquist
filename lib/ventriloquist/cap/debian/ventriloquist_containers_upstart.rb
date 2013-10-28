@@ -20,10 +20,10 @@ script
     sleep 1 # Give Docker some time
     for cidfile in \$(ls /var/lib/ventriloquist/cids/*); do
       cid=\$(cat \$cidfile)
-      if ! $(docker ps | grep -q $cid); then
+      if ! \$(docker ps | grep -q \$cid); then
         docker start \$(cat \$cidfile)
       else
-        echo "Container ${cid} already started"
+        echo "Container \${cid} already started"
       fi
     done
   fi

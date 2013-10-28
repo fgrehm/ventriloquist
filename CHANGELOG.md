@@ -1,4 +1,8 @@
-## [0.3.2](https://github.com/fgrehm/ventriloquist/compare/v0.3.1...master) (unreleased)
+## [0.3.2](https://github.com/fgrehm/ventriloquist/compare/v0.3.1...master) (October 28, 2013)
+
+BUG FIXES:
+
+  - Properly escape upstart job parameters
 
 ## [0.3.1](https://github.com/fgrehm/ventriloquist/compare/v0.3.0...v0.3.1) (October 27, 2013)
 
