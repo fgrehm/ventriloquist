@@ -12,7 +12,6 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder "../", "/vagrant", id: 'vagrant-root'
 
   config.vm.network :private_network, ip: "192.168.123.123"
-  config.vm.network :forwarded_port, guest: 8080, host: 8080
 
   config.cache.auto_detect = true
 
