@@ -1,5 +1,5 @@
 module VagrantPlugins
   module Ventriloquist
-    VERSION = "0.3.3.dev"
+    VERSION = "0.4.0.dev"
   end
 end

@@ -1,4 +1,8 @@
-## [0.3.3](https://github.com/fgrehm/ventriloquist/compare/v0.3.2...master) (unreleased)
+## [0.4.0](https://github.com/fgrehm/ventriloquist/compare/v0.3.2...master) (unreleased)
+
+IMPROVEMENTS:
+
+  - Bump [vocker] dependency to 0.4.0
 
 FEATURES:
 
