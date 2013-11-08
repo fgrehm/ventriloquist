@@ -8,5 +8,5 @@ MAINTAINER Fabio Rehm "fgrehm@gmail.com"
 ADD . /
 RUN /tmp/install-elasticsearch.sh && rm /tmp/install-elasticsearch.sh
 
-EXPOSE 9200:9200
+EXPOSE 9200
 CMD    ["/usr/share/elasticsearch/bin/elasticsearch", "-f"]

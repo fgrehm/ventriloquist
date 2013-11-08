@@ -1,6 +1,4 @@
 # Base image for creating Ventriloquist services
-#
-# VERSION               0.0.1
 
 FROM ubuntu:quantal
 MAINTAINER Fabio Rehm "fgrehm@gmail.com"
