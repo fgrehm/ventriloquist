@@ -22,7 +22,7 @@ Vagrant.configure("2") do |config|
   config.vm.provider :lxc do |lxc, override|
     # Required to boot nested containers
     lxc.customize 'aa_profile', 'unconfined'
-    override.vm.box_url = 'http://bit.ly/vagrant-lxc-raring64-2013-07-12'
+    override.vm.box_url = 'http://bit.ly/vagrant-lxc-raring64-2013-10-23'
   end
 
   # Required to boot nested containers
