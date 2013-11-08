@@ -1,6 +1,4 @@
-# MailCatcher X.X.X
-#
-# VERSION               0.0.1
+# MailCatcher
 
 FROM fgrehm/ventriloquist-base
 MAINTAINER Fabio Rehm "fgrehm@gmail.com"

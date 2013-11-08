@@ -2,14 +2,16 @@ require_relative 'service'
 require_relative 'services/postgresql'
 require_relative 'services/redis'
 require_relative 'services/mysql'
+require_relative 'services/elastic_search'
 
 module VagrantPlugins
   module Ventriloquist
     class ServicesBuilder
       MAPPING = {
-        'pg'    => Services::PostgreSQL,
-        'mysql' => Services::MySql,
-        'redis' => Services::Redis
+        'pg'            => Services::PostgreSQL,
+        'mysql'         => Services::MySql,
+        'redis'         => Services::Redis,
+        'elasticsearch' => Services::ElasticSearch,
       }
 
       def initialize(services, mapping = MAPPING)
