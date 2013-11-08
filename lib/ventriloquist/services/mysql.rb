@@ -2,6 +2,11 @@ module VagrantPlugins
   module Ventriloquist
     module Services
       class MySql < Service
+        def initialize(*args)
+          super
+          @config[:ports] ||= ['3306:3306']
+        end
+
         def provision(machine)
           super
 

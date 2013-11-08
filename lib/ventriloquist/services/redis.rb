@@ -2,6 +2,11 @@ module VagrantPlugins
   module Ventriloquist
     module Services
       class Redis < Service
+        def initialize(*args)
+          super
+          @config[:ports] ||= ['6379:6379']
+        end
+
         def provision(machine)
           super
           install_client(machine)

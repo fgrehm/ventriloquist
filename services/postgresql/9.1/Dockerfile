@@ -1,9 +1,6 @@
 # PostgreSQL 9.1
-#
-# VERSION               0.0.1
 
 FROM fgrehm/ventriloquist-base
-MAINTAINER Fabio Rehm "fgrehm@gmail.com"
 
 # prevent apt from starting postgres right after the installation
 RUN echo "#!/bin/sh\nexit 101" > /usr/sbin/policy-rc.d; chmod +x /usr/sbin/policy-rc.d
@@ -16,5 +13,5 @@ RUN rm /usr/sbin/policy-rc.d
 ADD config /
 RUN /bin/prepare-postgres vagrant vagrant
 
-EXPOSE  5432:5432
+EXPOSE  5432
 CMD     ["/bin/start-postgres"]
