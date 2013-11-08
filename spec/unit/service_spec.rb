@@ -8,7 +8,7 @@ require 'ventriloquist/service'
 describe VagrantPlugins::Ventriloquist::Service do
   verify_contract(:service)
 
-  fake(:docker_client)
+  let(:docker_client) { fake(:docker_client, container_running?: false) }
   fake(:communicator) { VagrantPlugins::CommunicatorSSH::Communicator }
   fake(:ui)           { Vagrant::UI::Interface }
   let(:env)           { fake(:environment, ui: ui) }
@@ -21,20 +21,30 @@ describe VagrantPlugins::Ventriloquist::Service do
 
   before { subject.provision(machine) }
 
-  it 'runs the configured container' do
-    expect(docker_client).to have_received.run_container(service_conf)
+  context 'given the container has not been created' do
+    it 'runs the configured container' do
+      expect(docker_client).to have_received.run_container(service_conf)
+    end
+
+    it 'creates a directory for keeping container id files' do
+      expect(communicator).to have_received.sudo('mkdir -p /var/lib/ventriloquist/cids')
+    end
+
+    it 'assigns a cidfile based on the service name' do
+      expected_cidfile = "#{described_class::CONTAINER_IDS_PATH}/#{service_name}"
+      expect(docker_client).to have_received.run_container(with{|c| c[:cidfile] == expected_cidfile})
+    end
+
+    it 'sets dns to 127.0.0.1 to reduce latency' do
+      expect(docker_client).to have_received.run_container(with{|c| c[:dns] == "127.0.0.1"})
+    end
   end
 
-  it 'creates a directory for keeping container id files' do
-    expect(communicator).to have_received.sudo('mkdir -p /var/lib/ventriloquist/cids')
-  end
+  context 'given the container has already been created' do
+    let(:docker_client) { fake(:docker_client, container_running?: true) }
 
-  it 'assigns a cidfile based on the service name' do
-    expected_cidfile = "#{described_class::CONTAINER_IDS_PATH}/#{service_name}"
-    expect(docker_client).to have_received.run_container(with{|c| c[:cidfile] == expected_cidfile})
-  end
-
-  it 'sets dns to 127.0.0.1 to reduce latency' do
-    expect(docker_client).to have_received.run_container(with{|c| c[:dns] == "127.0.0.1"})
+    it 'does not attempt to run container' do
+      expect(docker_client).to_not have_received.run_container(any_args)
+    end
   end
 end
