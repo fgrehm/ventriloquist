@@ -51,7 +51,7 @@ and it is known to work with the following Ubuntu 13.04 Vagrant VMs using Docker
 * http://bit.ly/vagrant-lxc-raring64-2013-10-23 (yes! LXC inception :)
 
 _Please note that in order to use the plugin on [vagrant-lxc](https://github.com/fgrehm/vagrant-lxc)
-containers you need some extra steps described below_
+containers you need some [extra steps](#usage-with-vagrant-lxc) described below_
 
 On its current state is a "stable experiment", I've been using a setup with the
 plugin without hitting [major issues](https://github.com/fgrehm/ventriloquist/issues?labels=bug&page=1&state=open)
@@ -70,7 +70,7 @@ vagrant plugin install ventriloquist
 
 ## Usage
 
-Just add the provisioner block to your Vagrantfile and `vagrant up` it:
+Add the provisioner block to your Vagrantfile and `vagrant up` it:
 
 ```ruby
 Vagrant.configure("2") do |config|
@@ -81,6 +81,18 @@ Vagrant.configure("2") do |config|
     env.platforms << %w( nodejs ruby:2.0.0 go )
     # Install random packages
     env.packages << %w( htop sqlite3 )
+  end
+end
+```
+
+If you are using the plugin on a VirtualBox machine, you need to make sure the
+VM has at least 1gb of RAM, so make sure you have something similar to the code
+below on your `Vagrantfile`:
+
+```ruby
+Vagrant.configure("2") do |config|
+  config.vm.provider "virtualbox" do |vb|
+    vb.customize ["modifyvm", :id, "--memory", 1024]
   end
 end
 ```
