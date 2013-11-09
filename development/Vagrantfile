@@ -43,7 +43,9 @@ STR
   ]
 
   config.vm.provision :ventriloquist do |env|
+    # Basic examples
     env.services << %w( elasticsearch redis memcached pg mailcatcher mysql )
+    env.platforms << %w( nodejs phantomjs go:1.1.2 erlang elixir python:2.7.5 )
 
     # Test custom ports and tagging
     env.services << {
@@ -56,8 +58,10 @@ STR
         ports: [':9200']
     } }
 
-    env.platforms << %w( nodejs phantomjs go:1.1.2 erlang elixir python:2.7.5 )
     # Test hash usage
     env.platforms << { ruby: { version: '2.0.0' } }
+
+    # Test packages installation
+    env.packages << %w( htop sqlite3 )
   end
 end

@@ -57,6 +57,11 @@ module VagrantPlugins
         Cap::Linux::Untar
       end
 
+      guest_capability("debian", "install_packages") do
+        require_relative "cap/debian/install_packages"
+        Cap::Debian::InstallPackages
+      end
+
       # Services related
 
       guest_capability("debian", "ventriloquist_containers_upstart") do

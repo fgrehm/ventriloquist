@@ -19,11 +19,22 @@ module VagrantPlugins
       def provision
         @logger = Log4r::Logger.new("vagrant::provisioners::ventriloquist")
 
+        provision_packages
         provision_services
         provision_platforms
       end
 
       protected
+
+      def provision_packages
+        return if config.packages.empty?
+
+        if @machine.guest.capability?(:install_packages)
+          @machine.guest.capability(:install_packages, config.packages.flatten)
+        else
+          @machine.env.ui.warn(I18n.t 'ventriloquist.install_packages_unsupported')
+        end
+      end
 
       def provision_services
         return if config.services.empty?
