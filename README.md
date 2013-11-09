@@ -6,14 +6,14 @@
 
 Ventriloquist combines [Vagrant](http://www.vagrantup.com/) and [Docker](http://www.docker.io/)
 to give **developers** the ability to configure portable and disposable development
-VMs with ease. It lowers the entry barrier of building a sane working environment without
-the need to learn tools like [Puppet](http://puppetlabs.com/puppet/what-is-puppet)
+environments with ease. It lowers the entry barrier of building a sane working environment
+without the need to learn tools like [Puppet](http://puppetlabs.com/puppet/what-is-puppet)
 or [Chef](http://www.opscode.com/chef/).
 
 Its core is made of a Vagrant plugin that uses a set of opinionated Docker
 images + some [guest capabilities](http://docs.vagrantup.com/v2/plugins/guest-capabilities.html)
-to provision VMs with services and programming language environments, think of
-it as a "Heroku for Vagrant" where a Dyno is your Vagrant machine and Docker
+to provision VMs with services, programming language environments and OS packages,
+think of it as a "Heroku for Vagrant" where a Dyno is your Vagrant machine and Docker
 services are its addons.
 
 To give you an idea, this is what it takes to configure a Vagrant VM ready
@@ -45,10 +45,10 @@ end
 
 Early development, the feature set and configuration format might change rapidly
 and it is known to work with the following Ubuntu 13.04 Vagrant VMs using Docker
-0.6.1+ and Vagrant 1.2.0+:
+0.6.5+ and Vagrant 1.3.0+:
 
 * http://cloud-images.ubuntu.com/vagrant/raring/current/raring-server-cloudimg-amd64-vagrant-disk1.box
-* http://bit.ly/vagrant-lxc-raring64-2013-07-12 (yes! LXC inception :)
+* http://bit.ly/vagrant-lxc-raring64-2013-10-23 (yes! LXC inception :)
 
 _Please note that in order to use the plugin on [vagrant-lxc](https://github.com/fgrehm/vagrant-lxc)
 containers you need some extra steps described below_
@@ -79,12 +79,24 @@ Vagrant.configure("2") do |config|
     env.services << %w( redis pg:9.1 memcached elasticsearch )
     # Configure your development environment
     env.platforms << %w( nodejs ruby:2.0.0 go )
+    # Install random packages
+    env.packages << %w( htop sqlite3 )
   end
 end
 ```
 
 
 ## Available services
+
+| Name          | Provides       | Notes |
+| ------------- | -------------- | ----- |
+| elasticsearch | 0.90.6         | Runs on port 9200 |
+| memcached     | 1.4.14         | Runs on port 11211 |
+| pg            | PostgreSQL 9.2 | Runs on port 5432 and adds an `export PGHOST=localhost` to the guest's `/etc/profile.d/ventriloquist`. It will also install the `postgresql-client` and `libpq-dev` packages on the guest. |
+| pg:9.1        | PostgreSQL 9.1 | Same as above |
+| mysql         | 5.5            | Runs on port 3306 and creates a `/home/vagrant/.my.conf`. It will also install the `mysql-client` and `libmysqlclient-dev` packages on the guest. |
+| redis         | 2.4.15         | Runs on port 6379 and installs / compiles the `redis-cli` excutable |
+| mailcatcher   | 0.5.12         | SMPT server runs on 1025 and web interface on 1080 |
 
 The `services` parameter passed in on the Vagrantfile are the ones built with the
 Dockerfiles available under [_/services_](services) that are configured to require
@@ -101,16 +113,6 @@ the `psql` client works without any extra params.
 Please note that all of the builtin images are available on the [Docker index](https://index.docker.io/)
 with the `fgrehm/ventriloquist-` prefix that is ommited on the table below:
 
-| Name          | Provides       | Notes |
-| ------------- | -------------- | ----- |
-| elasticsearch | 0.90.3         | Runs on port 9200 |
-| memcached     | 1.4.14         | Runs on port 11211 |
-| pg            | PostgreSQL 9.2 | Runs on port 5432 and adds an `export PGHOST=localhost` to the guest's `/etc/profile.d/ventriloquist`. It will also install the `postgresql-client` and `libpq-dev` packages on the guest. |
-| pg:9.1        | PostgreSQL 9.1 | Same as above |
-| mysql         | 5.5            | Runs on port 3306 and creates a `/home/vagrant/.my.conf`. It will also install the `mysql-client` and `libmysqlclient-dev` packages on the guest. |
-| redis         | 2.4.15         | Runs on port 6379 and installs / compiles the `redis-cli` excutable |
-| mailcatcher   | 0.5.12         | SMPT server runs on 1025 and web interface on 1080 |
-
 Since services are just Docker images, you can build your own image, push to the
 registry and use it on your Vagrantfile, you'll just need to specify its fully
 qualified name and the corresponding Ventriloquist service:
@@ -122,15 +124,45 @@ Vagrant.configure("2") do |config|
       redis: { image: 'username/redis' },
       pg:    { image: 'otheruser/pg', tag: 'latest' }
     }
+
+    # If you need more instances of a service, you'll need to give it a unique
+    # name and fine tune it at will, for example:
+    env.services << {
+      # This is basically a Vocker container definition
+      api_db: { image: 'otheruser/pg', ports: [':5432'] },
+
+      # The 'vimage' saves you from typing in `image: 'fgrehm/ventriloquist-redis'`
+      worker_redis: { vimage: 'redis' },
+
+      # The 'type' parameter tells Ventriloquist to configure the service with
+      # its defaults and does some extra work (like installing additional packages)
+      # if the service requires it
+      worker_db: { image: 'your-user/your-pg', type: 'pg' },
+    }
   end
 end
 ```
 
-If for more information on creating / running Docker containers please have a look
+For more information on creating / running Docker containers please have a look
 at [Vocker](https://github.com/fgrehm/vocker)'s documentation.
+
+If you want to build your own service and don't have plans to deploy your
+containers to production, make sure you "[inherit](services/redis/Dockerfile#L5)"
+your services from the [`fgrehm/ventriloquist-base`](services/base/Dockerfile)
+image in order to save on some disk space.
 
 
 ## Available platforms
+
+| Name      | Provides          |
+| --------- | ----------------- |
+| ruby      | rvm + Ruby 2.0.0  |
+| go        | 1.1.2             |
+| nodejs    | nvm + Nodejs 0.10 |
+| phantomjs | 1.9.2             |
+| erlang    | The latest version available at https://packages.erlang-solutions.com/erlang/ (currently R16B02) |
+| elixir    | 0.11.0            |
+| python    | pyenv + 3.3.2     |
 
 In order to configure the VM for usage with the programming language that your
 app is written on, the plugin leverages Vagrant's [guest capabilities](http://docs.vagrantup.com/v2/plugins/guest-capabilities.html)
@@ -143,19 +175,37 @@ example above), the latest version of the available platforms will be installed.
 For example, if you omit the Ruby version you want to use, Ventriloquist will
 install 2.0.0 with the latest path level.
 
-So far I've only set up the stuff I need to work but feel free to submit a Pull
-Request with the scripts required to set things for other platforms:
 
-| Name      | Provides          |
-| --------- | ----------------- |
-| ruby      | rvm + Ruby 2.0.0  |
-| go        | 1.1.2             |
-| nodejs    | nvm + Nodejs 0.10 |
-| phantomjs | 1.9.1             |
-| erlang    | Currently limited to the latest version available at https://packages.erlang-solutions.com/erlang/ (currently R16B02) |
-| elixir    | 0.10.3            |
-| python    | pyenv + 3.3.2     |
+## System packages
 
+There are times that you just want to install some random set of packages on the guest
+machine and frequently you end up writing lots of inline shell scripts with
+`apt-get update && apt-get install ...`s all over the place. In order to avoid those
+long strings polluting your Vagrantfile you can use the `packages` parameter to save
+you a few keystrokes.
+
+In other words:
+
+```ruby
+Vagrant.configure("2") do |config|
+  # This:
+  config.vm.provision :shell, inline: %[
+    apt-get update
+    apt-get install -y --force-yes -q \
+                    -o Dpkg::Options::='--force-confdef' \
+                    -o Dpkg::Options::='--force-confold' \
+                    htop sqlite3 curl lxc
+  ]
+
+  # Becomes this:
+  config.vm.provision :ventriloquist do |env|
+    env.packages << %w( htop sqlite3 curl lxc )
+  end
+end
+```
+
+Please note that once the package is instaled it won't ever be upgraded unless
+you run a `apt-get upgrade` or the equivalent.
 
 ## Ideas for improvements
 
@@ -217,6 +267,14 @@ The LXC networking configs are only required if you are on an Ubuntu host as
 it automatically creates the `lxcbr0` bridge for you on the host machine and
 if you don't do that the vagrant-lxc container will end up crashing as it
 will collide with the host's `lxcbr0`.
+
+
+## Support
+
+Support this project and [others by fgrehm](https://github.com/fgrehm)
+via [gittip](https://www.gittip.com/fgrehm/).
+
+[![Support via Gittip](https://rawgithub.com/twolfson/gittip-badge/0.1.0/dist/gittip.png)](https://www.gittip.com/fgrehm/)
 
 
 ## Contributing
