@@ -7,7 +7,7 @@ module VagrantPlugins
             machine.communicate.tap do |comm|
               if ! comm.test('which psql > /dev/null')
                 machine.env.ui.info('Installing PostgreSQL client')
-                comm.sudo('apt-get install -y postgresql-client')
+                machine.guest.capability(:install_packages, 'postgresql-client', silent: true)
               end
             end
           end

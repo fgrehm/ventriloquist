@@ -30,7 +30,7 @@ module VagrantPlugins
         return if config.packages.empty?
 
         if @machine.guest.capability?(:install_packages)
-          @machine.guest.capability(:install_packages, config.packages.flatten)
+          @machine.guest.capability(:install_packages, config.packages)
         else
           @machine.env.ui.warn(I18n.t 'ventriloquist.install_packages_unsupported')
         end

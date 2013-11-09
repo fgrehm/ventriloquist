@@ -4,12 +4,7 @@ module VagrantPlugins
       module Debian
         module MercurialInstall
           def self.mercurial_install(machine)
-            machine.communicate.tap do |comm|
-              if ! comm.test('which hg > /dev/null')
-                machine.env.ui.info('Installing mercurial')
-                comm.sudo('apt-get install -y mercurial')
-              end
-            end
+            machine.guest.capability(:install_packages, 'mercurial')
           end
         end
       end

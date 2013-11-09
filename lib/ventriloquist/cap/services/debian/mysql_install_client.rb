@@ -7,7 +7,7 @@ module VagrantPlugins
             machine.communicate.tap do |comm|
               if ! comm.test('which mysql > /dev/null')
                 machine.env.ui.info('Installing MySQL client')
-                comm.sudo('apt-get install -y mysql-client')
+                machine.guest.capability(:install_packages, 'mysql-client', silent: true)
               end
             end
           end

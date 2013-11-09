@@ -7,7 +7,7 @@ module VagrantPlugins
             machine.communicate.tap do |comm|
               if ! comm.test('dpkg -l | grep libpq-dev')
                 machine.env.ui.info('Installing PostgreSQL headers')
-                comm.sudo('apt-get install -y libpq-dev')
+                machine.guest.capability(:install_packages, 'libpq-dev', silent: true)
               end
             end
           end

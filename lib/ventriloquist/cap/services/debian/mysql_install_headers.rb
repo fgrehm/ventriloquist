@@ -7,7 +7,7 @@ module VagrantPlugins
             machine.communicate.tap do |comm|
               if ! comm.test('dpkg -l | grep libmysqlclient-dev')
                 machine.env.ui.info('Installing MySQL headers')
-                comm.sudo('apt-get install -y libmysqlclient-dev')
+                machine.guest.capability(:install_packages, 'libmysqlclient-dev', silent: true)
               end
             end
           end
