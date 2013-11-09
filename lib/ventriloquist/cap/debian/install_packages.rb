@@ -10,7 +10,8 @@ module VagrantPlugins
               return if packages_to_install.empty?
 
               machine.env.ui.info("Installing #{packages_to_install}")
-              comm.sudo("sudo apt-get install #{packages_to_install.join(' ')} -y --force-yes -q -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold'")
+              comm.sudo("apt-get update -q")
+              comm.sudo("apt-get install #{packages_to_install.join(' ')} -y --force-yes -q -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold'")
             end
           end
 

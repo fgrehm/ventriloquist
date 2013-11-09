@@ -44,11 +44,16 @@ STR
 
   config.vm.provision :ventriloquist do |env|
     # Basic examples
-    env.services << %w( elasticsearch redis memcached pg mailcatcher mysql )
+    env.services << %w( redis memcached pg mailcatcher mysql )
     env.platforms << %w( nodejs phantomjs go:1.1.2 erlang elixir python:2.7.5 )
 
     # Test custom ports and tagging
     env.services << {
+      'es' => {
+        image: 'fgrehm/ventriloquist-elasticsearch',
+        # Check if container will get the built in elasticsearch configs
+        type: 'elasticsearch',
+      },
       'pg-9.1' => {
         image: 'fgrehm/ventriloquist-pg',
         tag: '9.1' },
@@ -62,6 +67,6 @@ STR
     env.platforms << { ruby: { version: '2.0.0' } }
 
     # Test packages installation
-    env.packages << %w( htop sqlite3 )
+    env.packages << %w( htop sqlite3 curl wget subversion )
   end
 end
