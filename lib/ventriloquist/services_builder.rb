@@ -54,7 +54,7 @@ module VagrantPlugins
 
         # REFACTOR: This is a bit confusing...
         config[:tag]   ||= (tag || 'latest')
-        config[:image] ||= extract_image_name(name)
+        config[:image] ||= extract_image_name(config.delete(:vimage) || name)
         config[:image] << ":#{config[:tag]}"
 
         klass = @mapping.fetch(type, Service)
