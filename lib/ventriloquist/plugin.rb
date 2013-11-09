@@ -25,6 +25,45 @@ module VagrantPlugins
         Config
       end
 
+      # Utils
+
+      guest_capability("debian", "git_install") do
+        require_relative "cap/debian/git_install"
+        Cap::Debian::GitInstall
+      end
+
+      guest_capability("debian", "mercurial_install") do
+        require_relative "cap/debian/mercurial_install"
+        Cap::Debian::MercurialInstall
+      end
+
+      guest_capability("linux", "make") do
+        require_relative "cap/linux/make"
+        Cap::Linux::Make
+      end
+
+      guest_capability("debian", "install_build_tools") do
+        require_relative "cap/debian/install_build_tools"
+        Cap::Debian::InstallBuildTools
+      end
+
+      guest_capability("linux", "download") do
+        require_relative "cap/linux/download"
+        Cap::Linux::Download
+      end
+
+      guest_capability("linux", "untar") do
+        require_relative "cap/linux/untar"
+        Cap::Linux::Untar
+      end
+
+      # Services related
+
+      guest_capability("debian", "ventriloquist_containers_upstart") do
+        require_relative "cap/debian/ventriloquist_containers_upstart"
+        Cap::Debian::VentriloquistContainersUpstart
+      end
+
       guest_capability("debian", "pg_install_client") do
         require_relative "cap/debian/pg_install_client"
         Cap::Debian::PgInstallClient
@@ -55,40 +94,7 @@ module VagrantPlugins
         Cap::Linux::MySqlConfigureClient
       end
 
-      guest_capability("debian", "git_install") do
-        require_relative "cap/debian/git_install"
-        Cap::Debian::GitInstall
-      end
-
-      guest_capability("debian", "mercurial_install") do
-        require_relative "cap/debian/mercurial_install"
-        Cap::Debian::MercurialInstall
-      end
-
-      guest_capability("linux", "make") do
-        require_relative "cap/linux/make"
-        Cap::Linux::Make
-      end
-
-      guest_capability("debian", "install_build_tools") do
-        require_relative "cap/debian/install_build_tools"
-        Cap::Debian::InstallBuildTools
-      end
-
-      guest_capability("debian", "ventriloquist_containers_upstart") do
-        require_relative "cap/debian/ventriloquist_containers_upstart"
-        Cap::Debian::VentriloquistContainersUpstart
-      end
-
-      guest_capability("linux", "download") do
-        require_relative "cap/linux/download"
-        Cap::Linux::Download
-      end
-
-      guest_capability("linux", "untar") do
-        require_relative "cap/linux/untar"
-        Cap::Linux::Untar
-      end
+      # Platforms related
 
       guest_capability("linux", "nvm_install") do
         require_relative "cap/linux/nvm_install"
@@ -105,6 +111,11 @@ module VagrantPlugins
         Cap::Linux::RvmInstall
       end
 
+      guest_capability("linux", "rvm_install_ruby") do
+        require_relative "cap/linux/rvm_install_ruby"
+        Cap::Linux::RvmInstallRuby
+      end
+
       guest_capability("debian", "phantomjs_install") do
         require_relative "cap/debian/phantomjs_install"
         Cap::Debian::PhantomjsInstall
@@ -113,11 +124,6 @@ module VagrantPlugins
       guest_capability("debian", "go_install") do
         require_relative "cap/debian/go_install"
         Cap::Debian::GoInstall
-      end
-
-      guest_capability("linux", "rvm_install_ruby") do
-        require_relative "cap/linux/rvm_install_ruby"
-        Cap::Linux::RvmInstallRuby
       end
 
       guest_capability("debian", "erlang_install") do
