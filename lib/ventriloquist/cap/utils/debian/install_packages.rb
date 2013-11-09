@@ -16,12 +16,14 @@ module VagrantPlugins
           end
 
           def self.installed_packages(machine)
-            cmd = "dpkg --get-selections | grep -v deinstall | awk '{ print $1 }'"
+            pkgs = ""
+            cmd  = "dpkg --get-selections | grep -v deinstall | awk '{ print $1 }'"
             machine.communicate.execute cmd do |buffer, output|
               if buffer == :stdout
-                return output.chomp.split("\n")
+                pkgs << output.chomp
               end
             end
+            pkgs.split("\n")
           end
         end
       end
