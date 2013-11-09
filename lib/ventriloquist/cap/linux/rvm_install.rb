@@ -7,7 +7,7 @@ module VagrantPlugins
             if ! machine.communicate.test('test -d /usr/local/rvm')
               machine.env.ui.info('Installing RVM')
               machine.communicate.sudo('\curl -L https://get.rvm.io | bash -s stable --autolibs=enabled')
-              machine.communicate.sudo("usermod -a -G rvm #{machine.config.ssh.username}")
+              machine.communicate.sudo("usermod -a -G rvm #{machine.config.ssh.username || 'vagrant'}")
             end
           end
         end
