@@ -1,8 +1,8 @@
 GIT
   remote: git://github.com/fgrehm/vagrant-cachier.git
-  revision: 536ca7ad54b3096644993f91f363df8a884d4600
+  revision: 2cb0610cc135bb08e45ddde4ec2f3fb92561b21f
   specs:
-    vagrant-cachier (0.4.2.dev)
+    vagrant-cachier (0.5.1.dev)
 
 GIT
   remote: git://github.com/fgrehm/vagrant-global-status.git
@@ -12,9 +12,9 @@ GIT
 
 GIT
   remote: git://github.com/fgrehm/vagrant-lxc.git
-  revision: 3d017ce3bdc46605c01605cd427893d61293fab1
+  revision: f7e62c032439fba8a1907600a2c2470572442e84
   specs:
-    vagrant-lxc (0.7.0.dev)
+    vagrant-lxc (0.7.1.dev)
 
 GIT
   remote: git://github.com/fgrehm/vagrant-pristine.git
@@ -24,9 +24,9 @@ GIT
 
 GIT
   remote: git://github.com/fgrehm/vocker.git
-  revision: e9d5064934c4c10d74b25b7a49b800db2f3c5e65
+  revision: cf69350237c788c949cf6127946f61671447ee7e
   specs:
-    vocker (0.4.0.dev)
+    vocker (0.4.1.dev)
 
 GIT
   remote: git://github.com/mitchellh/vagrant.git
@@ -44,7 +44,7 @@ PATH
   remote: .
   specs:
     ventriloquist (0.4.0.dev)
-      vocker (~> 0.4.0.dev)
+      vocker (~> 0.4.0)
 
 GEM
   remote: https://rubygems.org/
@@ -57,7 +57,7 @@ GEM
       ffi (~> 1.0, >= 1.0.11)
     coderay (1.0.9)
     dependor (1.0.1)
-    diff-lcs (1.2.4)
+    diff-lcs (1.2.5)
     erubis (2.7.0)
     ffi (1.9.3)
     formatador (0.2.4)
