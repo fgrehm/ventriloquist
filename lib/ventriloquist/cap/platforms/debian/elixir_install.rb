@@ -21,6 +21,7 @@ module VagrantPlugins
                   machine.guest.capability(:download, ELIXIR_PRECOMPILED, path)
                 end
 
+                # TODO: Create unzip capability
                 comm.sudo('apt-get install -y unzip')
                 comm.sudo("unzip -o #{path} -d /usr/local/elixir")
 

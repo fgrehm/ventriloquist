@@ -7,6 +7,7 @@ module VagrantPlugins
             machine.communicate.tap do |comm|
               if ! comm.test('test -d $HOME/.pyenv')
                 machine.env.ui.info('Installing pyenv dependencies')
+                # TODO: Use capability
                 comm.sudo('sudo apt-get install -y build-essential libreadline-dev libssl-dev libsqlite3-dev libbz2-dev')
 
                 machine.env.ui.info('Installing pyenv')

@@ -13,7 +13,7 @@ module VagrantPlugins
             machine.env.ui.info("Installing go #{version}")
             machine.communicate.tap do |comm|
               comm.sudo('apt-get install curl -y -q')
-              # TODO: Use download + untar capability
+              # TODO: Use download + untar capability and leverage vagrant-cachier
               comm.execute("cd /usr/local && curl #{src} | sudo tar xzfv -")
 
               if ! comm.test("grep -q '#{bin_path}' /etc/profile.d/ventriloquist.sh 2>/dev/null")
