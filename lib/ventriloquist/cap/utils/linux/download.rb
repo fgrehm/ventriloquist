@@ -25,12 +25,12 @@ module VagrantPlugins
 
           def self.download_with_wget(machine, src, destination)
             machine.env.ui.info("Downloading #{src} to #{destination}")
-            comm.execute("wget #{src} -O #{destination}")
+            machine.communicate.execute("wget #{src} -O #{destination}")
           end
 
           def self.download_with_curl(machine, src, destination)
             machine.env.ui.info("Downloading #{src} to #{destination}")
-            comm.execute("curl #{src} -o #{destination}")
+            machine.communicate.execute("curl #{src} -o #{destination}")
           end
         end
       end

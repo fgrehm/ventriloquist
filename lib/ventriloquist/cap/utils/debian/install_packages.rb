@@ -15,7 +15,6 @@ module VagrantPlugins
               end
 
               if requires_update?(machine)
-                puts 'apt-get update!'
                 comm.sudo("apt-get update -q")
               end
               comm.sudo("apt-get install #{packages_to_install.join(' ')} -y --force-yes -q -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold'")

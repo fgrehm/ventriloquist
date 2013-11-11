@@ -80,7 +80,7 @@ Vagrant.configure("2") do |config|
     # Configure your development environment
     env.platforms << %w( nodejs ruby:2.0.0 go )
     # Install random packages
-    env.packages << %w( htop sqlite3 )
+    env.packages << %w( imagemagick htop sqlite3 )
   end
 end
 ```
