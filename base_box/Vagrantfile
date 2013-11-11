@@ -1,0 +1,69 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.require_plugin 'vagrant-lxc'
+Vagrant.require_plugin 'vagrant-cachier'
+Vagrant.require_plugin 'vagrant-pristine'
+Vagrant.require_plugin 'vocker'
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "raring64"
+
+  config.vm.network :private_network, ip: "192.168.113.123"
+  config.cache.auto_detect = true
+  config.cache.enable_nfs  = true
+
+  config.vm.provider :virtualbox do |_, override|
+    override.vm.box_url = 'http://cloud-images.ubuntu.com/vagrant/raring/current/raring-server-cloudimg-amd64-vagrant-disk1.box'
+  end
+
+  config.vm.provider :lxc do |lxc, override|
+    # Required to boot nested containers
+    lxc.customize 'aa_profile', 'unconfined'
+    override.vm.box_url = 'http://bit.ly/vagrant-lxc-raring64-2013-10-23'
+  end
+
+  if ENV['LXC']
+    puts 'building lxc'
+
+    # Disable default lxc bridge
+    config.vm.provision :shell, inline: %[
+      cat <<STR > /etc/default/lxc
+LXC_AUTO="false"
+USE_LXC_BRIDGE="false"
+STR
+    ]
+  end
+
+  config.vm.provision :docker do |docker|
+    docker.pull_images 'fgrehm/ventriloquist-base'
+  end
+
+  if ENV['LXC']
+    # Remove docker dependency on lxc-net
+    config.vm.provision :shell, inline: %[
+      sed 's/and started.*//' /etc/init/docker.conf
+    ]
+  end
+
+  # Required packages
+  config.vm.provision :shell, inline: %[
+    apt-get update
+    apt-get install -y git curl build-essential libreadline-dev libssl-dev libsqlite3-dev libbz2-dev
+  ]
+
+  config.vm.provision :shell, privileged: false, inline: %[
+    # RVM
+    \\curl -L https://get.rvm.io | sudo bash -s stable --autolibs=enabled
+    sudo usermod -a -G rvm $USER
+
+    # NVM
+    \\curl https://raw.github.com/creationix/nvm/master/install.sh | sh
+
+    # pyenv
+    git clone git://github.com/yyuu/pyenv.git $HOME/.pyenv
+    echo 'export PYENV_ROOT="$HOME/.pyenv"' >> ~/.profile
+    echo 'export PATH="$PYENV_ROOT/bin:$PATH"' >> ~/.profile
+    echo 'eval "$(pyenv init -)"' >> ~/.profile
+  ]
+end
