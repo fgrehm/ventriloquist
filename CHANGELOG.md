@@ -2,6 +2,7 @@
 
 FEATURES:
 
+  - Added support for using RethinkDB [[GH-4]]
   - Support for installing guest specific packages (aka `apt-get install`)
   - Introduce `:type` and `:vimage` parameters for services allowing us to provision
     multiple containers of the same kind with less pain.

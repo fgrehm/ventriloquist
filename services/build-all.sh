@@ -12,6 +12,8 @@ docker build -t ${PREFIX}-pg:9.1 postgresql/9.1
 
 docker build -t ${PREFIX}-mysql mysql
 
+docker build -t ${PREFIX}-rethinkdb rethinkdb
+
 docker build -t ${PREFIX}-openjdk7 openjdk7
 docker build -t ${PREFIX}-elasticsearch elasticsearch
 

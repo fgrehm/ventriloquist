@@ -109,6 +109,7 @@ end
 | mysql         | 5.5            | Runs on port 3306 and creates a `/home/vagrant/.my.conf`. It will also install the `mysql-client` and `libmysqlclient-dev` packages on the guest. |
 | redis         | 2.4.15         | Runs on port 6379 and installs / compiles the `redis-cli` excutable |
 | mailcatcher   | 0.5.12         | SMPT server runs on 1025 and web interface on 1080 |
+| rethinkdb     | 1.10.1         | Uses the 28015 port for the client driver, 29015 for the intracluster connections and 8080 for the administrative web UI |
 
 The `services` parameter passed in on the Vagrantfile are the ones built with the
 Dockerfiles available under [_/services_](services) that are configured to require

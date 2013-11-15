@@ -5,6 +5,7 @@ require_relative 'services/mail_catcher'
 require_relative 'services/memcached'
 require_relative 'services/mysql'
 require_relative 'services/elastic_search'
+require_relative 'services/rethink_db'
 
 module VagrantPlugins
   module Ventriloquist
@@ -16,6 +17,7 @@ module VagrantPlugins
         'mysql'         => Services::MySql,
         'redis'         => Services::Redis,
         'memcached'     => Services::Memcached,
+        'rethinkdb'     => Services::RethinkDB,
       }
 
       def initialize(services, mapping = MAPPING)
