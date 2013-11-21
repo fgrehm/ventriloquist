@@ -22,8 +22,8 @@ IMPROVEMENTS:
   - platforms/phantomjs: Bumped to 1.9.2
   - platforms/rvm: Install globally [[GH-24]]
   - services/elasticsearch: Bumped to 0.90.6
-  - services/base: Inline Dockerfile commands into a single `RUN` in order to reduce
-    the amount of AUFS layers
+  - services: Most images had the `RUN` instructions inlined in order to reduce the amount
+    of AUFS layers
 
 ## [0.3.2](https://github.com/fgrehm/ventriloquist/compare/v0.3.1...v0.3.2) (October 28, 2013)
 
