@@ -2,13 +2,8 @@
 
 set -e
 
-user=$1
-password=$2
-
 user='vagrant'
 password='vagrant'
-
-sed -i 's/127.0.0.1/0.0.0.0/' /etc/mysql/my.cnf
 
 mysqld& sleep 3
 
