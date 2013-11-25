@@ -1,7 +1,6 @@
 # Elasticsearch
 
 FROM fgrehm/ventriloquist-openjdk7
-MAINTAINER Fabio Rehm "fgrehm@gmail.com"
 
 RUN wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.90.7.deb -O /tmp/elasticsearch.deb -q --no-check-certificate && \
     dpkg -i /tmp/elasticsearch.deb && \
