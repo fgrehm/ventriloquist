@@ -26,7 +26,7 @@ IMPROVEMENTS:
   - services: Most images had the `RUN` instructions inlined in order to reduce the amount
     of AUFS layers
   - services/elasticsearch: Bumped to 0.90.7
-  - services/redis: Bumped to 2.8.0
+  - services/redis: Bumped to 2.8.1
   - services/mysql: Support for 5.6
 
 ## [0.3.2](https://github.com/fgrehm/ventriloquist/compare/v0.3.1...v0.3.2) (October 28, 2013)
