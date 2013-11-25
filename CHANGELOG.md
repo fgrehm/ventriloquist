@@ -1,8 +1,10 @@
 ## [0.4.0](https://github.com/fgrehm/ventriloquist/compare/v0.3.2...master) (unreleased)
 
+**NOTICE**: _All_ of the services images have been rebuilt from scratch.
+
 FEATURES:
 
-  - Added support for using RethinkDB [[GH-4]]
+  - Added support for RethinkDB [[GH-4]]
   - Support for installing guest specific packages (aka `apt-get install`)
   - Introduce `:type` and `:vimage` parameters for services allowing us to provision
     multiple containers of the same kind with less pain.

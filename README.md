@@ -40,23 +40,18 @@ end
   to legacy projects.
 
 
-
 ## Status
 
-Early development, the feature set and configuration format might change rapidly
-and it is known to work with the following Ubuntu 13.04 Vagrant VMs using Docker
-0.6.5+ and Vagrant 1.3.0+:
+Basically a "stable experiment", I've been using VMs configured with the plugin
+for the last 3 months and I tested it against the following Ubuntu VMs using
+Docker 0.6.5+ and Vagrant 1.3.0+:
 
-* http://cloud-images.ubuntu.com/vagrant/raring/current/raring-server-cloudimg-amd64-vagrant-disk1.box
 * http://bit.ly/vagrant-lxc-raring64-2013-10-23 (yes! LXC inception :)
+* http://cloud-images.ubuntu.com/vagrant/raring/current/raring-server-cloudimg-amd64-vagrant-disk1.box
+* https://oss-binaries.phusionpassenger.com/vagrant/boxes/ubuntu-12.04.3-amd64-vbox.box
 
 _Please note that in order to use the plugin on [vagrant-lxc](https://github.com/fgrehm/vagrant-lxc)
 containers you need some [extra steps](#usage-with-vagrant-lxc) described below_
-
-On its current state is a "stable experiment", I've been using a setup with the
-plugin without hitting [major issues](https://github.com/fgrehm/ventriloquist/issues?labels=bug&page=1&state=open)
-for a while now.
-
 
 
 ## Installation
@@ -102,20 +97,21 @@ end
 
 | Name          | Provides       | Notes |
 | ------------- | -------------- | ----- |
-| elasticsearch | 0.90.6         | Runs on port 9200 |
+| elasticsearch | 0.90.7         | Runs on port 9200 |
 | memcached     | 1.4.14         | Runs on port 11211 |
 | pg            | PostgreSQL 9.2 | Runs on port 5432 and adds an `export PGHOST=localhost` to the guest's `/etc/profile.d/ventriloquist`. It will also install the `postgresql-client` and `libpq-dev` packages on the guest. |
 | pg:9.1        | PostgreSQL 9.1 | Same as above |
-| mysql         | 5.5            | Runs on port 3306 and creates a `/home/vagrant/.my.conf`. It will also install the `mysql-client` and `libmysqlclient-dev` packages on the guest. |
-| redis         | 2.4.15         | Runs on port 6379 and installs / compiles the `redis-cli` excutable |
+| mysql         | 5.6            | Runs on port 3306 and creates a `/home/vagrant/.my.conf`. It will also install the `mysql-client` and `libmysqlclient-dev` packages on the guest. |
+| mysql:5.5     | 5.5            | Same as above |
+| redis         | 2.8.0          | Runs on port 6379 and installs / compiles the `redis-cli` excutable |
 | mailcatcher   | 0.5.12         | SMPT server runs on 1025 and web interface on 1080 |
 | rethinkdb     | 1.10.1         | Uses the 28015 port for the client driver, 29015 for the intracluster connections and 8080 for the administrative web UI |
 
 The `services` parameter passed in on the Vagrantfile are the ones built with the
 Dockerfiles available under [_/services_](services) that are configured to require
 no additional configuration for usage with the default `vagrant` user that usually
-comes with Vagrant boxes and will always be available from `localhost` using the
-default service port (like 5432 for PostgreSQL).
+comes with Vagrant boxes. Apart from that they'll always be available from `localhost`
+using the default service port (like 5432 for PostgreSQL).
 
 Some extra steps might be required to simplify the connection with the configured
 services. As an example, besides running the associated Docker image, setting up
@@ -124,7 +120,7 @@ PostgreSQL will involve installing the `postgresql-client` package and adding an
 the `psql` client works without any extra params.
 
 Please note that all of the builtin images are available on the [Docker index](https://index.docker.io/)
-with the `fgrehm/ventriloquist-` prefix that is ommited on the table below:
+with the `fgrehm/ventriloquist-` prefix that is ommited on the table above.
 
 Since services are just Docker images, you can build your own image, push to the
 registry and use it on your Vagrantfile, you'll just need to specify its fully
