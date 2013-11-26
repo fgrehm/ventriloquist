@@ -99,7 +99,8 @@ end
 | ------------- | -------------- | ----- |
 | elasticsearch | 0.90.7         | Runs on port 9200 |
 | memcached     | 1.4.15         | Runs on port 11211 |
-| pg            | PostgreSQL 9.2 | Runs on port 5432 and adds an `export PGHOST=localhost` to the guest's `/etc/profile.d/ventriloquist`. It will also install the `postgresql-client` and `libpq-dev` packages on the guest. |
+| pg            | PostgreSQL 9.3 | Runs on port 5432 and adds an `export PGHOST=localhost` to the guest's `/etc/profile.d/ventriloquist`. It will also install the `postgresql-client` and `libpq-dev` packages on the guest. |
+| pg:9.2        | PostgreSQL 9.2 | Same as above |
 | pg:9.1        | PostgreSQL 9.1 | Same as above |
 | mysql         | 5.6            | Runs on port 3306 and creates a `/home/vagrant/.my.conf`. It will also install the `mysql-client` and `libmysqlclient-dev` packages on the guest. |
 | mysql:5.5     | 5.5            | Same as above |

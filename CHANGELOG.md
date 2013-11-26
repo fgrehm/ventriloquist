@@ -29,6 +29,7 @@ IMPROVEMENTS:
   - services/memcached: Bumped to 1.4.15
   - services/redis: Bumped to 2.8.1
   - services/mysql: Support for 5.6
+  - services/postgresql: Support for 9.3
   - services/postgresql: Make use of packages from http://apt.postgresql.org/pub/repos/apt
     instead of the deprecated `ppa:pitti/postgresql`
 
