@@ -9,7 +9,7 @@ RUN wget -q http://download.redis.io/releases/redis-2.8.1.tar.gz -O /tmp/redis.t
     cd redis-2.8.1 && \
     make redis-server && \
     mv src/redis-server /usr/bin && \
-    cd .. && rm -rf redis-*
+    cd .. && rm -rf redis*
 
 EXPOSE 6379
 CMD    ["/usr/bin/redis-server"]
