@@ -2,8 +2,10 @@
 
 FROM fgrehm/ventriloquist-base
 
-RUN add-apt-repository ppa:pitti/postgresql && apt-get update
-RUN apt-get install -y postgresql-9.2 postgresql-contrib-9.2 && apt-get clean
+RUN wget --quiet -O - http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc | sudo apt-key add - && \
+    echo "deb http://apt.postgresql.org/pub/repos/apt precise-pgdg main" > /etc/apt/sources.list.d/pgdg.list && \
+    apt-get update
+RUN apt-get install -y postgresql-9.2
 
 ADD config /
 RUN /bin/prepare-postgres vagrant vagrant

@@ -29,6 +29,8 @@ IMPROVEMENTS:
   - services/memcached: Bumped to 1.4.15
   - services/redis: Bumped to 2.8.1
   - services/mysql: Support for 5.6
+  - services/postgresql: Make use of packages from http://apt.postgresql.org/pub/repos/apt
+    instead of the deprecated `ppa:pitti/postgresql`
 
 ## [0.3.2](https://github.com/fgrehm/ventriloquist/compare/v0.3.1...v0.3.2) (October 28, 2013)
 
