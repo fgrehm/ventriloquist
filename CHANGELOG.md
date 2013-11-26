@@ -26,6 +26,7 @@ IMPROVEMENTS:
   - services: Most images had the `RUN` instructions inlined in order to reduce the amount
     of AUFS layers
   - services/elasticsearch: Bumped to 0.90.7
+  - services/memcached: Bumped to 1.4.15
   - services/redis: Bumped to 2.8.1
   - services/mysql: Support for 5.6
 
