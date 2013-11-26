@@ -17,6 +17,7 @@ RUN apt-get install libaio-dev -y && \
     /opt/mysql/server-5.6/scripts/mysql_install_db --user=mysql --datadir=/var/lib/mysql && \
     rm /opt/mysql/server-5.6/my*.cnf && \
     echo 'export PATH="/opt/mysql/server-5.6/bin:$PATH"' > /etc/profile.d/mysql.sh && \
+    apt-get clean && \
     rm /opt/mysql/server-5.6/bin/mysqld-debug && \
     rm /opt/mysql/server-5.6/bin/mysqltest_* && \
     rm /opt/mysql/server-5.6/bin/mysql_client_test* && \

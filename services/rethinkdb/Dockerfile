@@ -5,7 +5,8 @@ FROM fgrehm/ventriloquist-base
 
 RUN add-apt-repository ppa:rethinkdb/ppa && \
     apt-get update && \
-    apt-get install -y rethinkdb
+    apt-get install -y rethinkdb && \
+    apt-get clean
 
 # create the /rethinkdb_data dir structure
 RUN /usr/bin/rethinkdb create

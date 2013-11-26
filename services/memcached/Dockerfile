@@ -10,7 +10,7 @@ RUN wget -q http://memcached.googlecode.com/files/memcached-1.4.15.tar.gz -O /tm
     ./configure --prefix=/usr/local/memcached && \
     make && \
     make install && \
-    cd .. && rm -rf memcached*
+    cd .. && rm -rf memcached* && apt-get clean
 
 EXPOSE 11211
 CMD    ["/usr/local/memcached/bin/memcached", "-u", "daemon"]
