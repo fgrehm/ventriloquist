@@ -22,4 +22,4 @@ su postgres -c "psql template1 -c \"update pg_database set datallowconn = FALSE 
 /etc/init.d/postgresql stop
 
 # Avoid password for local connections
-echo 'host all all all trust' >> /etc/postgresql/9.2/main/pg_hba.conf
+echo 'host all all all trust' >> /etc/postgresql/9.3/main/pg_hba.conf
