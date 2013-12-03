@@ -5,7 +5,7 @@ gemspec
 
 group :development, :test do
   gem 'rake'
-  gem 'vagrant', github: 'mitchellh/vagrant'
+  gem 'vagrant', github: 'mitchellh/vagrant', tag: 'v1.3.5'
   gem 'rspec'
   gem 'simplecov', require: false
   gem 'bogus'
