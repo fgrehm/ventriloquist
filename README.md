@@ -109,7 +109,7 @@ end
 | pg:9.1        | PostgreSQL 9.1 | Same as above |
 | mysql         | 5.6            | Runs on port 3306 and creates a `/home/vagrant/.my.conf`. It will also install the `mysql-client` and `libmysqlclient-dev` packages on the guest. |
 | mysql:5.5     | 5.5            | Same as above |
-| redis         | 2.8.0          | Runs on port 6379 and installs / compiles the `redis-cli` excutable |
+| redis         | 2.8.2          | Runs on port 6379 and installs / compiles the `redis-cli` excutable |
 | mailcatcher   | 0.5.12         | SMPT server runs on 1025 and web interface on 1080 |
 | rethinkdb     | 1.11.0         | Uses the 28015 port for the client driver, 29015 for the intracluster connections and 8080 for the administrative web UI |
 

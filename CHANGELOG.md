@@ -34,7 +34,7 @@ IMPROVEMENTS:
     of AUFS layers
   - services/elasticsearch: Bumped to 0.90.7
   - services/memcached: Bumped to 1.4.15
-  - services/redis: Bumped to 2.8.1
+  - services/redis: Bumped to 2.8.2
   - services/mysql: Support for 5.6
   - services/postgresql: Support for 9.3
   - services/postgresql: Make use of packages from http://apt.postgresql.org/pub/repos/apt
