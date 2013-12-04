@@ -1,7 +1,5 @@
 ## [0.4.0](https://github.com/fgrehm/ventriloquist/compare/v0.3.2...master) (unreleased)
 
-**NOTICE**: _All_ of the services images have been rebuilt from scratch.
-
 FEATURES:
 
   - Added support for RethinkDB [[GH-4]]
@@ -12,6 +10,14 @@ FEATURES:
 
 BACKWARDS INCOMPATIBILITY:
 
+  - _All_ of the services images have been rebuilt from scratch. The reason behind
+    it is that we inlined `RUN` instructions in order to reduce the amount of AUFS
+    layers and disk space taken by images.
+  - From now on we'll lock Docker installation to a "known to work version"
+    by default (currently 0.7.0). Things are moving pretty fast over there and it
+    is pretty hard to keep up with all the changes and to ensure things are
+    running smooth. You can still specify the version on your `Vagrantfile` but
+    by default it will be a specific version.
   - The Docker images that make up for services no longer exposes host ports by
     default in order to aling with Docker's [recent changes](http://blog.docker.io/2013/10/docker-0-6-5-links-container-naming-advanced-port-redirects-host-integration)
     related to the way exposed ports work.
