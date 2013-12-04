@@ -12,18 +12,29 @@ module VagrantPlugins
     class Provisioner < Vagrant.plugin("2", :provisioner)
       def initialize(machine, config, installer = nil, client = nil)
         super(machine, config)
-        @installer = installer || Vocker::DockerInstaller.new(@machine)
+        @installer = installer || Vocker::DockerInstaller.new(@machine, config.docker_version)
         @client    = client    || Vocker::DockerClient.new(@machine)
       end
 
       def provision
         @logger = Log4r::Logger.new("vagrant::provisioners::ventriloquist")
 
+        provision_packages
         provision_services
         provision_platforms
       end
 
       protected
+
+      def provision_packages
+        return if config.packages.empty?
+
+        if @machine.guest.capability?(:install_packages)
+          @machine.guest.capability(:install_packages, config.packages)
+        else
+          @machine.env.ui.warn(I18n.t 'ventriloquist.install_packages_unsupported')
+        end
+      end
 
       def provision_services
         return if config.services.empty?

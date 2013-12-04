@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -e
+
+user='vagrant'
+password='vagrant'
+
+source /etc/profile.d/mysql.sh
+mysqld& sleep 3
+
+mysqladmin -u root password $password
+
+echo "create user '${user}'@'%' identified by '${password}';" | mysql -u root -p$password
+echo "grant all on *.* to '${user}'@'%' with grant option;" | mysql -u root -p$password
+echo "FLUSH PRIVILEGES;" | mysql -uroot -p${password}

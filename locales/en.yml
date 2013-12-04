@@ -1,1 +1,6 @@
-vagrant:
+en:
+  ventriloquist:
+    install_packages_unsupported: |-
+      The guest VM does not support installing packages! Please open an issue
+      at https://github.com/fgrehm/ventriloquist/issues reporting your guest
+      distribution.

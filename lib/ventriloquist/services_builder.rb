@@ -1,15 +1,23 @@
 require_relative 'service'
 require_relative 'services/postgresql'
 require_relative 'services/redis'
+require_relative 'services/mail_catcher'
+require_relative 'services/memcached'
 require_relative 'services/mysql'
+require_relative 'services/elastic_search'
+require_relative 'services/rethink_db'
 
 module VagrantPlugins
   module Ventriloquist
     class ServicesBuilder
       MAPPING = {
-        'pg'    => Services::PostgreSQL,
-        'mysql' => Services::MySql,
-        'redis' => Services::Redis
+        'pg'            => Services::PostgreSQL,
+        'elasticsearch' => Services::ElasticSearch,
+        'mailcatcher'   => Services::MailCatcher,
+        'mysql'         => Services::MySql,
+        'redis'         => Services::Redis,
+        'memcached'     => Services::Memcached,
+        'rethinkdb'     => Services::RethinkDB,
       }
 
       def initialize(services, mapping = MAPPING)
@@ -44,13 +52,14 @@ module VagrantPlugins
 
       def create_service_provisioner(name, config, docker_client)
         name, tag = name.to_s.split(':')
+        type      = config.delete(:type) || name
 
         # REFACTOR: This is a bit confusing...
         config[:tag]   ||= (tag || 'latest')
-        config[:image] ||= extract_image_name(name)
+        config[:image] ||= extract_image_name(config.delete(:vimage) || name)
         config[:image] << ":#{config[:tag]}"
 
-        klass = @mapping.fetch(name, Service)
+        klass = @mapping.fetch(type, Service)
         klass.new(name, config, docker_client)
       end
 

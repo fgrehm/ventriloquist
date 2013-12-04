@@ -5,7 +5,7 @@ gemspec
 
 group :development, :test do
   gem 'rake'
-  gem 'vagrant', github: 'mitchellh/vagrant', tag: 'v1.2.7'
+  gem 'vagrant', github: 'mitchellh/vagrant', tag: 'v1.3.5'
   gem 'rspec'
   gem 'simplecov', require: false
   gem 'bogus'
@@ -16,5 +16,6 @@ group :development do
   gem 'vagrant-pristine',      github: 'fgrehm/vagrant-pristine'
   gem 'vagrant-global-status', github: 'fgrehm/vagrant-global-status'
   gem 'vagrant-cachier',       github: 'fgrehm/vagrant-cachier'
+  gem 'vocker',                github: 'fgrehm/vocker'
   gem 'guard-rspec'
 end

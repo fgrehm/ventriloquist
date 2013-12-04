@@ -1,12 +1,11 @@
-# Elasticsearch 0.90.3
-#
-# VERSION               0.0.1
+# Elasticsearch
 
 FROM fgrehm/ventriloquist-openjdk7
-MAINTAINER Fabio Rehm "fgrehm@gmail.com"
 
-ADD . /
-RUN /tmp/install-elasticsearch.sh && rm /tmp/install-elasticsearch.sh
+RUN wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.90.7.deb -O /tmp/elasticsearch.deb -q --no-check-certificate && \
+    dpkg -i /tmp/elasticsearch.deb && \
+    rm /tmp/elasticsearch.deb && \
+    apt-get clean
 
-EXPOSE 9200:9200
+EXPOSE 9200
 CMD    ["/usr/share/elasticsearch/bin/elasticsearch", "-f"]

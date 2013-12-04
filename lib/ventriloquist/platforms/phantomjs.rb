@@ -3,7 +3,7 @@ module VagrantPlugins
     module Platforms
       class PhantomJS < Platform
         def provision(machine)
-          @config[:version] = '1.9.1' if config[:version] == 'latest'
+          @config[:version] = '1.9.2' if config[:version] == 'latest'
           machine.guest.capability(:phantomjs_install, @config[:version])
         end
       end

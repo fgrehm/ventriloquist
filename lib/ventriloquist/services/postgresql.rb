@@ -2,6 +2,11 @@ module VagrantPlugins
   module Ventriloquist
     module Services
       class PostgreSQL < Service
+        def initialize(*args)
+          super
+          @config[:ports] ||= ['5432:5432']
+        end
+
         def provision(machine)
           super
 
