@@ -34,13 +34,6 @@ USE_LXC_BRIDGE="false"
 STR
   ]
 
-  # Remove docker dependency on lxc-net
-  config.vm.provision :shell, inline: %[
-    if $(grep -q 'and started' /etc/init/docker.conf); then
-      sed -i.bkp 's/and started.*//' /etc/init/docker.conf
-    fi
-  ]
-
   config.vm.provision :ventriloquist do |env|
     # Basic examples
     env.services << %w( redis memcached pg mailcatcher mysql rethinkdb )
@@ -68,4 +61,11 @@ STR
     # Test packages installation
     env.packages << %w( htop sqlite3 curl wget )
   end
+
+  # Remove docker dependency on lxc-net
+  config.vm.provision :shell, inline: %[
+    if $(grep -q 'and started' /etc/init/docker.conf); then
+      sed -i.bkp 's/and started.*//' /etc/init/docker.conf
+    fi
+  ]
 end
