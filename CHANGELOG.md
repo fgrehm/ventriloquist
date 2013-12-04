@@ -26,7 +26,7 @@ IMPROVEMENTS:
 
   - core: Bumped [[vocker]] dependency to 0.4.0
   - core: Provide feedback during provisioning whether a service is already running
-  - platforms/elixir: Bumped to 0.11.1 [[GH-34]]
+  - platforms/elixir: Bumped to 0.11.2 [[GH-34]]
   - platforms/phantomjs: Bumped to 1.9.2
   - platforms/rvm: Install globally [[GH-24]]
   - services: Most images had the `RUN` instructions inlined in order to reduce the amount

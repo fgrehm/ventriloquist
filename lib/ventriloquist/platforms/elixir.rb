@@ -3,7 +3,7 @@ module VagrantPlugins
     module Platforms
       class Elixir < Platform
         def provision(machine)
-          @config[:version] = '0.11.1' if @config[:version] == 'latest'
+          @config[:version] = '0.11.2' if @config[:version] == 'latest'
           machine.guest.tap do |guest|
             guest.capability(:erlang_install)
             guest.capability(:elixir_install, @config[:version])
