@@ -1,3 +1,10 @@
+## NOTICE
+
+I'm currently in the process of rebuilding service images for the [0.4.0](https://github.com/fgrehm/ventriloquist/blob/next/CHANGELOG.md#040-december-3-2013)
+release and things might be unstable while I'm pushing the new Docker images to
+the index. Please be patient, it shouldn't take longer than a few hours :)
+
+
 # Ventriloquist
 
 > **ven·tril·o·quist**: _(noun)_ a person who can speak or utter sounds so that
