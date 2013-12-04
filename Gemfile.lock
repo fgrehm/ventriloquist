@@ -44,7 +44,7 @@ GIT
 PATH
   remote: .
   specs:
-    ventriloquist (0.4.0.dev)
+    ventriloquist (0.4.0)
       vocker (~> 0.4.0)
 
 GEM

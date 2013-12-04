@@ -1,4 +1,4 @@
-## [0.4.0](https://github.com/fgrehm/ventriloquist/compare/v0.3.2...master) (unreleased)
+## [0.4.0](https://github.com/fgrehm/ventriloquist/compare/v0.3.2...v0.4.0) (December 3, 2013)
 
 FEATURES:
 
@@ -24,7 +24,7 @@ BACKWARDS INCOMPATIBILITY:
 
 IMPROVEMENTS:
 
-  - core: Bumped [[vocker]] dependency to 0.4.0
+  - core: Bumped [vocker] dependency to 0.4.0
   - core: Provide feedback during provisioning whether a service is already running
   - platforms/go: Bumped to 1.2
   - platforms/elixir: Bumped to 0.11.2 [[GH-34]]
@@ -63,7 +63,7 @@ FEATURES:
 
 IMPROVEMENTS:
 
-  - Bump [[vocker]] dependency to 0.3.2
+  - Bump [vocker] dependency to 0.3.2
 
 ## [0.2.1](https://github.com/fgrehm/ventriloquist/compare/v0.2.0...v0.2.1) (October 12, 2013)
 
@@ -90,6 +90,7 @@ BUG FIXES:
 
 
 
+[GH-4]: https://github.com/fgrehm/ventriloquist/issues/4
 [GH-34]: https://github.com/fgrehm/ventriloquist/issues/24
 [GH-24]: https://github.com/fgrehm/ventriloquist/issues/24
 [GH-9]: https://github.com/fgrehm/ventriloquist/issues/9
