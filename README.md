@@ -48,7 +48,6 @@ Docker 0.6.5+ and Vagrant 1.3.0+:
 
 * http://bit.ly/vagrant-lxc-raring64-2013-10-23 (yes! LXC inception :)
 * http://cloud-images.ubuntu.com/vagrant/raring/current/raring-server-cloudimg-amd64-vagrant-disk1.box
-* https://oss-binaries.phusionpassenger.com/vagrant/boxes/ubuntu-12.04.3-amd64-vbox.box
 
 _Please note that in order to use the plugin on [vagrant-lxc](https://github.com/fgrehm/vagrant-lxc)
 containers you need some [extra steps](#usage-with-vagrant-lxc) described below_
