@@ -172,11 +172,11 @@ image in order to save on some disk space.
 | Name      | Provides          |
 | --------- | ----------------- |
 | ruby      | rvm + Ruby 2.0.0  |
-| go        | 1.1.2             |
+| go        | 1.2               |
 | nodejs    | nvm + Nodejs 0.10 |
 | phantomjs | 1.9.2             |
 | erlang    | The latest version available at https://packages.erlang-solutions.com/erlang/ (currently R16B02) |
-| elixir    | 0.11.0            |
+| elixir    | 0.11.2            |
 | python    | pyenv + 3.3.2     |
 
 In order to configure the VM for usage with the programming language that your
