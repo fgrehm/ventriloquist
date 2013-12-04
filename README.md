@@ -70,10 +70,16 @@ Add the provisioner block to your Vagrantfile and `vagrant up` it:
 ```ruby
 Vagrant.configure("2") do |config|
   config.vm.provision :ventriloquist do |env|
+    # Pick the Docker version you want to use (defaults to 0.7.0)
+    # or use :latest to install the latest version available
+    env.docker_version = '0.6.7'
+
     # Pick the services you need to have around
     env.services << %w( redis pg:9.1 memcached elasticsearch )
+
     # Configure your development environment
     env.platforms << %w( nodejs ruby:2.0.0 go )
+
     # Install random packages
     env.packages << %w( imagemagick htop sqlite3 )
   end

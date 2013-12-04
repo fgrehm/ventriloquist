@@ -8,7 +8,7 @@ module VagrantPlugins
         @services       = []
         @platforms      = []
         @packages       = []
-        @docker_version = :latest
+        @docker_version = '0.7.0'
       end
     end
   end
