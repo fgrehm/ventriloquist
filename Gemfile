@@ -16,6 +16,5 @@ group :development do
   gem 'vagrant-pristine',      github: 'fgrehm/vagrant-pristine'
   gem 'vagrant-global-status', github: 'fgrehm/vagrant-global-status'
   gem 'vagrant-cachier',       github: 'fgrehm/vagrant-cachier'
-  gem 'vocker',                github: 'fgrehm/vocker'
   gem 'guard-rspec'
 end

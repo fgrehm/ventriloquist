@@ -1,5 +1,9 @@
 ## [0.4.1](https://github.com/fgrehm/ventriloquist/compare/v0.4.0...master) (unreleased)
 
+BUG FIXES:
+
+  - Bump [[vocker]] to 0.4.1 and fix check for whether services are running [[GH-39]]
+
 ## [0.4.0](https://github.com/fgrehm/ventriloquist/compare/v0.3.2...v0.4.0) (December 3, 2013)
 
 FEATURES:
@@ -92,6 +96,7 @@ BUG FIXES:
 
 
 
+[GH-39]: https://github.com/fgrehm/ventriloquist/issues/39
 [GH-4]: https://github.com/fgrehm/ventriloquist/issues/4
 [GH-34]: https://github.com/fgrehm/ventriloquist/issues/24
 [GH-24]: https://github.com/fgrehm/ventriloquist/issues/24
