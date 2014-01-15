@@ -3,7 +3,7 @@ module VagrantPlugins
     module Cap
       module Debian
         module ErlangInstall
-          ERLANG_SOLUTIONS_PKG = "https://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb"
+          ERLANG_SOLUTIONS_PKG = "http://packages.erlang-solutions.com/erlang-solutions_1.0_all.deb"
 
           def self.erlang_install(machine)
             machine.communicate.tap do |comm|
