@@ -11,6 +11,12 @@ RUN apt-get update && apt-get install -y \
       gcc \
       locales \
       curl \
+      psmisc \
+      vim \
+      cron \
+      python \
+      logrotate \
+      lsb-release \
       wget && \
     rm -rf /var/lib/apt/lists/* && \
     rm -rf /tmp/* && \
