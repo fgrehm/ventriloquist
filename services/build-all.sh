@@ -6,7 +6,7 @@ PREFIX='fgrehm/ventriloquist'
 
 docker build --rm -t ${PREFIX}-base base
 
-# docker build -t ${PREFIX}-pg:9.3 postgresql/9.3
+docker build --rm -t ${PREFIX}-pg-9.3 postgresql/9.3
 # docker build -t ${PREFIX}-pg:9.2 postgresql/9.2
 # docker build -t ${PREFIX}-pg:9.1 postgresql/9.1
 #
