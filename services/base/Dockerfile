@@ -1,16 +1,18 @@
 # Base image for creating Ventriloquist services
 
-FROM ubuntu:quantal
+FROM debian:jessie
 MAINTAINER Fabio Rehm "fgrehm@gmail.com"
 
-ENV LC_ALL C
-ENV DEBIAN_FRONTEND noninteractive
-
-RUN echo "deb http://archive.ubuntu.com/ubuntu quantal main universe" > /etc/apt/sources.list && \
-    apt-get update && \
-    apt-get -y upgrade && \
-    apt-get install -y wget curl vim language-pack-en build-essential software-properties-common && \
+RUN apt-get update && apt-get install -y \
+      git \
+      libxml2-dev \
+      build-essential \
+      make \
+      gcc \
+      locales \
+      curl \
+      wget && \
+    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /tmp/* && \
     apt-get autoremove && \
-    apt-get clean && \
-    locale-gen en_US && \
-    echo 'LANG="en_US.UTF-8"' >> /etc/default/locale
+    apt-get clean
