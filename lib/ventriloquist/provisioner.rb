@@ -1,5 +1,5 @@
-require "vocker/docker_client"
-require "vocker/docker_installer"
+require Vagrant.source_root.join("plugins/provisioners/docker/client")
+require Vagrant.source_root.join("plugins/provisioners/docker/installer")
 
 require_relative "errors"
 require_relative "services_builder"
