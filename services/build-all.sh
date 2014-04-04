@@ -20,6 +20,6 @@ docker build --rm -t ${PREFIX}-pg-9.1 postgresql/9.1
 #
 # docker build -t ${PREFIX}-memcached memcached
 #
-# docker build -t ${PREFIX}-redis redis
+docker build -t ${PREFIX}-redis-2.8 redis
 #
 # docker build -t ${PREFIX}-mailcatcher mailcatcher
