@@ -1,14 +1,12 @@
 require 'spec_helper'
 
-require 'vocker/docker_client'
+require Vagrant.source_root.join('plugins/provisioners/docker/client')
 require 'ventriloquist/services_builder'
 
 describe VagrantPlugins::Ventriloquist::ServicesBuilder do
   Service = VagrantPlugins::Ventriloquist::Service
 
-  verify_contract(:services_builder)
-
-  fake(:docker_client)
+  let(:docker_client) { instance_double(VagrantPlugins::Docker::Client, container_running?: false, run_container: false) }
 
   let(:pg_cfg)       { {image: 'user/pg', tag: '9.2'} }
   let(:custom_mapping) { {'mysql' => custom_service} }
@@ -29,8 +27,8 @@ describe VagrantPlugins::Ventriloquist::ServicesBuilder do
   let(:vimage_ex) { services[4] }
 
   it 'builds a list of service objects' do
-    expect(services).to have(5).items
-    expect(services.all?{|s| s.is_a?(Service)}).to be_true
+    expect(services.size).to eq(5)
+    expect(services.all?{|s| s.is_a?(Service)}).to be_truthy
   end
 
   it 'uses container name as type' do

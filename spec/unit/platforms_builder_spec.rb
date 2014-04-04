@@ -5,10 +5,6 @@ require 'ventriloquist/platforms_builder'
 describe VagrantPlugins::Ventriloquist::PlatformsBuilder do
   Platform = VagrantPlugins::Ventriloquist::Platform
 
-  verify_contract(:platforms_builder)
-
-  fake(:docker_client)
-
   let(:cfg)               { {version: '13.0'} }
   let(:platforms_configs) { [{my_lang: cfg}, :your_lang, ['my_plat:version']] }
   let(:custom_mapping)    { {'my_lang' => my_lang_class, 'your_lang' => your_lang_class, 'my_plat' => my_plat_class} }
@@ -30,7 +26,7 @@ describe VagrantPlugins::Ventriloquist::PlatformsBuilder do
   let(:my_plat)   { platforms[2] }
 
   it 'builds a list of platform objects' do
-    expect(platforms).to have(3).items
+    expect(platforms.size).to eq(3)
     expect(my_lang).to   be_a(my_lang_class)
     expect(your_lang).to be_a(your_lang_class)
     expect(my_plat).to   be_a(my_plat_class)
