@@ -1,5 +1,15 @@
 ## [0.5.0](https://github.com/fgrehm/ventriloquist/compare/v0.4.1...master) (unreleased)
 
+BACKWARDS INCOMPATIBILITY:
+
+  - Support for Vagrant < 1.5 has been removed, please use a previous plugin version
+    if you can't upgrade.
+
+IMPROVEMENTS:
+
+  - core: Bumped docker to 0.9.1
+  - core: Removed dependency on [vocker]
+
 
 ## [0.4.1](https://github.com/fgrehm/ventriloquist/compare/v0.4.0...v0.4.1) (December 13, 2013)
 
