@@ -39,9 +39,9 @@ describe VagrantPlugins::Ventriloquist::Service do
   end
 
   context 'given the container has already been created' do
-    let(:docker_client) { double(VagrantPlugins::Docker::Client, container_running?: false) }
+    let(:docker_client) { double(VagrantPlugins::Docker::Client, container_running?: true, run_container: true) }
 
-    skip 'does not attempt to run container' do
+    it 'does not attempt to run container' do
       expect(docker_client).to_not have_received(:run_container)
     end
   end
