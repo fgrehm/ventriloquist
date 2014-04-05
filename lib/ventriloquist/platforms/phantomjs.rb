@@ -3,8 +3,13 @@ module VagrantPlugins
     module Platforms
       class PhantomJS < Platform
         def provision(machine)
-          @config[:version] = '1.9.2' if config[:version] == 'latest'
-          machine.guest.capability(:phantomjs_install, @config[:version])
+          if @config[:versions].empty?
+            machine.env.ui.warn('No phantomjs version specified, skipping installation')
+            return
+          elsif @config[:versions].size > 1
+            machine.env.ui.warn('Multiple versions specified for phantomjs, installing the first one configured')
+          end
+          machine.guest.capability(:phantomjs_install, @config[:versions].first)
         end
       end
     end
