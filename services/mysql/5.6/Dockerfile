@@ -3,8 +3,9 @@
 
 FROM fgrehm/ventriloquist-base
 
-RUN apt-get install libaio-dev -y && \
-    wget -q http://dev.mysql.com/get/Downloads/MySQL-5.6/mysql-5.6.14-debian6.0-x86_64.deb -O /tmp/mysql.deb && \
+RUN apt-get update && \
+    apt-get install libaio-dev -y && \
+    wget -q http://dev.mysql.com/get/Downloads/MySQL-5.6/mysql-5.6.17-debian6.0-x86_64.deb -O /tmp/mysql.deb && \
     dpkg -i /tmp/mysql.deb && \
     rm /tmp/mysql.deb && \
     groupadd mysql && \
@@ -17,12 +18,15 @@ RUN apt-get install libaio-dev -y && \
     /opt/mysql/server-5.6/scripts/mysql_install_db --user=mysql --datadir=/var/lib/mysql && \
     rm /opt/mysql/server-5.6/my*.cnf && \
     echo 'export PATH="/opt/mysql/server-5.6/bin:$PATH"' > /etc/profile.d/mysql.sh && \
-    apt-get clean && \
     rm /opt/mysql/server-5.6/bin/mysqld-debug && \
     rm /opt/mysql/server-5.6/bin/mysqltest_* && \
     rm /opt/mysql/server-5.6/bin/mysql_client_test* && \
     rm /opt/mysql/server-5.6/lib/libmysqld-debug.a && \
-    rm -rf /opt/mysql/server-5.6/mysql-test # Save some disk space
+    rm -rf /opt/mysql/server-5.6/mysql-test && \
+    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /tmp/* && \
+    apt-get autoremove && \
+    apt-get clean
 
 ADD config /
 
