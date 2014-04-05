@@ -2,64 +2,39 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-  config.vm.box = "raring64"
-  config.vm.synced_folder "../", "/vagrant", id: 'vagrant-root'
-
-  config.vm.network :private_network, ip: "192.168.123.123"
-
-  config.cache.auto_detect = true
-
-  config.vm.provider :virtualbox do |_, override|
-    override.vm.box_url = 'http://cloud-images.ubuntu.com/vagrant/raring/current/raring-server-cloudimg-amd64-vagrant-disk1.box'
-  end
-
   config.vm.provider :lxc do |lxc, override|
+    override.vm.box = 'fgrehm/raring64-lxc'
     # Required to boot nested containers
     lxc.customize 'aa_profile', 'unconfined'
-    override.vm.box_url = 'http://bit.ly/vagrant-lxc-raring64-2013-10-23'
   end
 
-  # Required to boot nested containers
-  # Disable default lxc bridge
-  config.vm.provision :shell, inline: %[
-    cat <<STR > /etc/default/lxc
-LXC_AUTO="false"
-USE_LXC_BRIDGE="false"
-STR
-  ]
+  config.vm.synced_folder "../", "/vagrant", id: 'vagrant-root'
+
+  config.cache.scope       = :machine
+  config.ssh.forward_agent = true
 
   config.vm.provision :ventriloquist do |env|
-    # Basic examples
-    env.services << %w( redis memcached pg mailcatcher mysql rethinkdb )
-    env.platforms << %w( nodejs phantomjs go erlang elixir python:2.7.5 )
-
-    # Test custom ports and tagging
-    env.services << {
-      'es' => {
-        image: 'fgrehm/ventriloquist-elasticsearch',
-        # Check if container will get the built in elasticsearch configs
-        type: 'elasticsearch',
-      },
-      'pg-9.1' => {
-        image: 'fgrehm/ventriloquist-pg',
-        tag: '9.1' },
-      'es-2' => {
-        image: 'fgrehm/ventriloquist-elasticsearch',
-        tag:   '0.90.3',
-        ports: [':9200']
-    } }
-
-    # Test hash usage
-    env.platforms << { ruby: { version: '2.0.0' } }
-
     # Test packages installation
     env.packages << %w( htop sqlite3 curl wget )
+    env.services << %w( redis-2.8 memcached-1.4 postgres-9.3 mailcatcher-0.5 mysql-5.5 rethinkdb-1.12 )
+    env.services << {
+      'es' => {
+        image: 'fgrehm/ventriloquist-elasticsearch-1.1',
+        args: '-P'
+      },
+      'mc' => { vimage: 'memcached-1.4' }
+    }
+
+    # This will intentionally show some warnings
+    env.platforms << %w( phantomjs go erlang elixir python ruby nodejs )
   end
 
-  # Remove docker dependency on lxc-net
-  config.vm.provision :shell, inline: %[
-    if $(grep -q 'and started' /etc/init/docker.conf); then
-      sed -i.bkp 's/and started.*//' /etc/init/docker.conf
-    fi
-  ]
+  config.vm.provision :ventriloquist do |env|
+    env.platforms << %w( phantomjs-1.9.2 go-1.2.1 erlang elixir-0.11.1 )
+    env.platforms << {
+      # The first version provided will be set as the default
+      nodejs: { versions: ['0.10', '0.9']    },
+      ruby:   { versions: ['2.1.1', '2.1.0'] }
+    }
+  end
 end
