@@ -13,7 +13,7 @@ describe VagrantPlugins::Ventriloquist::Service do
   let(:machine)       { instance_double(Vagrant::Machine, communicate: communicator, env: env) }
 
   let(:service_name) { 'dbserver' }
-  let(:service_conf) { { image: 'user/dbserver', tag: 'latest' } }
+  let(:service_conf) { { image: 'user/dbserver', args: '--dns 127.0.0.1' } }
 
   subject { described_class.new(service_name, service_conf, docker_client) }
 
@@ -33,8 +33,8 @@ describe VagrantPlugins::Ventriloquist::Service do
       expect(docker_client).to have_received(:run_container).with(hash_including(cidfile: expected_cidfile))
     end
 
-    it 'sets dns to 127.0.0.1 to reduce latency' do
-      expect(docker_client).to have_received(:run_container).with(hash_including(dns: "127.0.0.1"))
+    it 'passes on additional args' do
+      expect(docker_client).to have_received(:run_container).with(hash_including(args: "--dns 127.0.0.1"))
     end
   end
 

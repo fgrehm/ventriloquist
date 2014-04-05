@@ -56,7 +56,7 @@ module VagrantPlugins
         config[:image] ||= extract_image_name(config.delete(:vimage) || name)
 
         klass = @mapping.fetch(type, Service)
-        klass.new(name, config, docker_client)
+        klass.new(name.to_s, config, docker_client)
       end
 
       def extract_image_name(name)
@@ -68,7 +68,7 @@ module VagrantPlugins
       end
 
       def extract_service_type(type)
-        type.split('-').first
+        type.to_s.split('-').first
       end
     end
   end

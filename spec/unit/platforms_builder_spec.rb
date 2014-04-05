@@ -5,8 +5,8 @@ require 'ventriloquist/platforms_builder'
 describe VagrantPlugins::Ventriloquist::PlatformsBuilder do
   Platform = VagrantPlugins::Ventriloquist::Platform
 
-  let(:cfg)               { {version: '13.0'} }
-  let(:platforms_configs) { [{my_lang: cfg}, :your_lang, ['my_plat:version']] }
+  let(:cfg)               { {versions: '13.0'} }
+  let(:platforms_configs) { [{my_lang: cfg}, 'your_lang-1.2', ['my_plat-version']] }
   let(:custom_mapping)    { {'my_lang' => my_lang_class, 'your_lang' => your_lang_class, 'my_plat' => my_plat_class} }
 
   let(:my_lang_class) do
@@ -33,11 +33,11 @@ describe VagrantPlugins::Ventriloquist::PlatformsBuilder do
   end
 
   it 'extracts version from platform name' do
-    expect(my_plat.config[:version]).to eq('version')
+    expect(my_plat.config[:versions]).to eq(['version'])
   end
 
   it 'defaults configured version to latest' do
-    expect(your_lang.config[:version]).to eq('latest')
+    expect(your_lang.config[:versions]).to eq(['1.2'])
   end
 
   it 'configures services using defined configs' do
