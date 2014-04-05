@@ -9,6 +9,7 @@ IMPROVEMENTS:
 
   - core: Bumped docker to 0.9.1
   - core: Removed dependency on [vocker]
+  - core: Simplified usage with vagrant-lxc
 
 
 ## [0.4.1](https://github.com/fgrehm/ventriloquist/compare/v0.4.0...v0.4.1) (December 13, 2013)

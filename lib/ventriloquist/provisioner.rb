@@ -46,8 +46,13 @@ module VagrantPlugins
           @machine.guest.capability(:ventriloquist_containers_upstart)
         end
 
+        if @machine.provider_name == :lxc && @machine.guest.capability?(:prepare_container_for_docker)
+          @logger.info("vagrant-lxc container detected, will install lxc and tweak Docker settings")
+          @machine.guest.capability(:prepare_container_for_docker)
+        end
+
         unless @client.daemon_running?
-          raise Vocker::Errors::DockerNotRunning
+          raise 'Docker client is not running'
         end
 
         ServicesBuilder.build(config.services, @client).each do |service|

@@ -1,6 +1,11 @@
 module VagrantPlugins
   module Ventriloquist
     class Plugin < Vagrant.plugin("2")
+      guest_capability("debian", "prepare_container_for_docker") do
+        require_relative "utils/debian/prepare_container_for_docker"
+        Cap::Debian::PrepareContainerForDocker
+      end
+
       guest_capability("debian", "git_install") do
         require_relative "utils/debian/git_install"
         Cap::Debian::GitInstall
