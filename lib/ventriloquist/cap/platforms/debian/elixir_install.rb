@@ -39,7 +39,7 @@ module VagrantPlugins
           private
 
           def self.download_path(comm)
-            # If vagrant-cachier apt cache bucket is available, drop it there
+            # If vagrant-cachier cache bucket are available, drop it there
             if comm.test("test -d /tmp/vagrant-cache")
               "/tmp/vagrant-cache/elixir-v#{@version}.zip"
             else
