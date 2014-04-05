@@ -14,9 +14,9 @@ docker build -t ${PREFIX}-mysql-5.6 mysql/5.6
 docker build -t ${PREFIX}-mysql-5.5 mysql/5.5
 
 docker build -t ${PREFIX}-rethinkdb-1.12 rethinkdb
-#
-# docker build -t ${PREFIX}-openjdk7 openjdk7
-# docker build -t ${PREFIX}-elasticsearch elasticsearch
+
+docker build -t ${PREFIX}-openjdk7 openjdk7
+docker build -t ${PREFIX}-elasticsearch-1.1 elasticsearch
 #
 # docker build -t ${PREFIX}-memcached memcached
 #
