@@ -30,7 +30,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.provision :ventriloquist do |env|
-    env.platforms << %w( phantomjs-1.9.2 go-1.2.1 erlang elixir-0.11.1 python-2.7.4 )
+    env.platforms << %w( phantomjs-1.9.2 go-1.2.1 erlang elixir-0.11.1 python-3.0.1 )
     env.platforms << {
       # The first version provided will be set as the default
       nodejs: { versions: ['0.10', '0.9']    },
