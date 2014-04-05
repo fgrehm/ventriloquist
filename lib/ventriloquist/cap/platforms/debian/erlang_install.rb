@@ -7,18 +7,21 @@ module VagrantPlugins
 
           def self.erlang_install(machine)
             machine.communicate.tap do |comm|
-              if ! comm.test('which erl > /dev/null')
-                machine.env.ui.info('Installing Erlang')
-
-                path = download_path(comm)
-                unless comm.test("test -f #{path}")
-                  machine.guest.capability(:download, ERLANG_SOLUTIONS_PKG, path)
-                end
-                comm.sudo("dpkg -i #{path}")
-
-                comm.sudo('apt-get update')
-                comm.sudo('apt-get -y install erlang')
+              if comm.test('which erl > /dev/null')
+                machine.env.ui.info("Skipping Erlang installation")
+                return
               end
+
+              machine.env.ui.info('Installing Erlang')
+
+              path = download_path(comm)
+              unless comm.test("test -f #{path}")
+                machine.guest.capability(:download, ERLANG_SOLUTIONS_PKG, path)
+              end
+              comm.sudo("dpkg -i #{path}")
+
+              comm.sudo('apt-get update')
+              comm.sudo('apt-get -y install erlang')
             end
           end
 

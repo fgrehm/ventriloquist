@@ -26,6 +26,8 @@ module VagrantPlugins
               machine.env.ui.info("Installing Python #{version}")
               machine.communicate.execute("pyenv install #{version}")
               machine.communicate.execute("pyenv global #{version}")
+            else
+              machine.env.ui.info("Skipping Python '#{version}' installation")
             end
           end
         end

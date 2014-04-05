@@ -4,7 +4,10 @@ module VagrantPlugins
       module Debian
         module GoInstall
           def self.go_install(machine, version)
-            return if machine.communicate.test('which go > /dev/null')
+            if machine.communicate.test('which go > /dev/null')
+              machine.env.ui.info("Skipping go installation")
+              return
+            end
 
             src      = "https://go.googlecode.com/files/go#{version}.linux-amd64.tar.gz"
             bin_path = "/usr/local/go/bin"

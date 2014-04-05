@@ -4,7 +4,10 @@ module VagrantPlugins
       module Debian
         module PhantomjsInstall
           def self.phantomjs_install(machine, version)
-            return if machine.communicate.test('which phantomjs > /dev/null')
+            if machine.communicate.test('which phantomjs > /dev/null')
+              machine.env.ui.info("Skipping phantomjs installation")
+              return
+            end
 
             src_1      = "https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-#{version}-linux-x86_64.tar.bz2"
             src_2      = "https://phantomjs.googlecode.com/files/phantomjs-#{version}-linux-x86_64.tar.bz2"
