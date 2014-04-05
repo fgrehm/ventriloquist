@@ -17,9 +17,9 @@ docker build -t ${PREFIX}-rethinkdb-1.12 rethinkdb
 
 docker build -t ${PREFIX}-openjdk7 openjdk7
 docker build -t ${PREFIX}-elasticsearch-1.1 elasticsearch
-#
-# docker build -t ${PREFIX}-memcached memcached
-#
+
+docker build -t ${PREFIX}-memcached-1.4 memcached
+
 docker build -t ${PREFIX}-redis-2.8 redis
 #
 # docker build -t ${PREFIX}-mailcatcher mailcatcher
