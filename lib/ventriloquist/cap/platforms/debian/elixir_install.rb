@@ -3,7 +3,8 @@ module VagrantPlugins
     module Cap
       module Debian
         module ElixirInstall
-          ELIXIR_PRECOMPILED = "https://github.com/elixir-lang/elixir/releases/download/vVERSION/vVERSION.zip"
+          ELIXIR_PRECOMPILED_1 = "https://github.com/elixir-lang/elixir/releases/download/vVERSION/Precompiled.zip"
+          ELIXIR_PRECOMPILED_2 = "https://github.com/elixir-lang/elixir/releases/download/vVERSION/vVERSION.zip"
 
           def self.elixir_install(machine,version)
             @version = version
@@ -11,14 +12,17 @@ module VagrantPlugins
             machine.communicate.tap do |comm|
               if ! comm.test('which iex > /dev/null')
                 bin_path = "/usr/local/elixir/bin"
-                ELIXIR_PRECOMPILED.gsub!(/VERSION/,@version)
+                srcs = [
+                  ELIXIR_PRECOMPILED_1.gsub(/VERSION/, @version),
+                  ELIXIR_PRECOMPILED_2.gsub(/VERSION/, @version)
+                ]
 
                 machine.env.ui.info("Installing Elixir #{@version}")
 
                 path = download_path(comm)
 
                 unless comm.test("test -f #{path}")
-                  machine.guest.capability(:download, ELIXIR_PRECOMPILED, path)
+                  machine.guest.capability(:download, srcs, path)
                 end
 
                 # TODO: Create unzip capability
