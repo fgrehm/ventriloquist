@@ -4,11 +4,7 @@ module VagrantPlugins
       class RethinkDB < Service
         def initialize(*args)
           super
-          @config[:ports] ||= [
-            '28015:28015',
-            '29015:29015',
-            '8080:8080'
-          ]
+          @config[:args] ||= '-p 28015:28015 -p 29015:29015 -p 8080:8080'
         end
       end
     end

@@ -12,8 +12,8 @@ module VagrantPlugins
     class Provisioner < Vagrant.plugin("2", :provisioner)
       def initialize(machine, config, installer = nil, client = nil)
         super(machine, config)
-        @installer = installer || Vocker::DockerInstaller.new(@machine, config.docker_version)
-        @client    = client    || Vocker::DockerClient.new(@machine)
+        @installer = installer || Docker::Installer.new(@machine, config.docker_version)
+        @client    = client    || Docker::Client.new(@machine)
       end
 
       def provision

@@ -4,7 +4,7 @@ module VagrantPlugins
       class PostgreSQL < Service
         def initialize(*args)
           super
-          @config[:ports] ||= ['5432:5432']
+          @config[:args] ||= '-p 5432:5432'
         end
 
         def provision(machine)

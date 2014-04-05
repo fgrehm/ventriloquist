@@ -4,7 +4,7 @@ module VagrantPlugins
       class Memcached < Service
         def initialize(*args)
           super
-          @config[:ports] ||= ['11211:11211']
+          @config[:args] ||= '-p 11211:11211'
         end
       end
     end
