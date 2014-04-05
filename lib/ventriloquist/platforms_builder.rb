@@ -51,8 +51,13 @@ module VagrantPlugins
       end
 
       def create_platform_provisioner(name, config)
-        name, version = name.to_s.split(':')
-        config[:version] ||= (version || 'latest')
+        name, version = name.to_s.split('-')
+
+        if version
+          config[:versions] = [version]
+        else
+          config[:versions] = Array(config[:versions])
+        end
 
         klass = @mapping.fetch(name.to_s)
         klass.new(name, config)
