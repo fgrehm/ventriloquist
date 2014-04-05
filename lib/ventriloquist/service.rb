@@ -17,9 +17,10 @@ module VagrantPlugins
         else
           machine.env.ui.info("Starting '#{@name}' service")
           machine.communicate.sudo("mkdir -p #{CONTAINER_IDS_PATH}")
-          @config[:name]      = @name
-          @config[:cidfile]   = cidfile
-          @config[:daemonize] = true
+          @config[:cidfile]          = cidfile
+          @config[:daemonize]        = true
+          @config[:name]             = @name
+          @config[:auto_assign_name] = false
           @docker_client.run_container(@config)
         end
       end
