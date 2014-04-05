@@ -20,7 +20,7 @@ module VagrantPlugins
           @config[:cidfile]          = cidfile
           @config[:daemonize]        = true
           @config[:name]             = @name
-          @config[:auto_assign_name] = false
+          @config[:auto_assign_name] = true
           @docker_client.run_container(@config)
         end
       end
