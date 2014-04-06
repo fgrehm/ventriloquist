@@ -25,7 +25,7 @@ for development on [Discourse](http://www.discourse.org/):
 Vagrant.configure("2") do |config|
   config.vm.box = "quantal64"
   config.vm.provision :ventriloquist do |env|
-    env.services  << %w( redis-2.8 pg-9.1 mailcatcher-0.5 )
+    env.services  << %w( redis-2.8 postgres-9.1 mailcatcher-0.5 )
     env.platforms << %w( nodejs-0.10 ruby-1.9.3 )
   end
 end
@@ -63,7 +63,7 @@ Vagrant.configure("2") do |config|
     env.docker_version = '0.9.1'
 
     # Pick the services you need to have around
-    env.services << %w( redis-2.8 pg-9.1 memcached-1.4 elasticsearch-1.1 )
+    env.services << %w( redis-2.8 postgres-9.1 memcached-1.4 elasticsearch-1.1 )
 
     # Configure your development environment
     env.platforms << %w( nodejs-0.10 ruby-2.0.0 go-1.2 )
@@ -124,7 +124,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision :ventriloquist do |env|
     env.services << {
       redis:    { image: 'username/redis' },
-      postgres: { image: 'otheruser/pg' }
+      postgres: { image: 'otheruser/postgres' }
     }
 
     # If you need more instances of a service, you'll need to give it a unique
@@ -139,7 +139,7 @@ Vagrant.configure("2") do |config|
       # The 'type' parameter tells Ventriloquist to configure the service with
       # its defaults and does some extra work (like installing additional packages)
       # if the service requires it
-      worker_db: { image: 'your-user/your-pg', type: 'postgres' },
+      worker_db: { image: 'your-user/your-postgres', type: 'postgres' },
     }
   end
 end
