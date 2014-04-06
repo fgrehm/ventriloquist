@@ -62,6 +62,9 @@ module VagrantPlugins
       def extract_image_name(name)
         if name =~ /(\w+\/\w+)/
           $1
+        # HACK: This should be noted on the README
+        elsif name =~ /^elasticsearch-(\d+\.\d+)$/
+          "fgrehm/ventriloquist-es-#{$1}"
         else
           "fgrehm/ventriloquist-#{name}"
         end

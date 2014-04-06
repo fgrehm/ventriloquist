@@ -7,6 +7,8 @@ BACKWARDS INCOMPATIBILITY:
   - Services / platforms versions are now required to be specified from Vagrantfile
     to increase reproducibility / reduce the chances of surprises and simplify plugin
     maintenance.
+  - _All_ of the services images have been rebuilt from scratch and are now
+    trusted builds.
   - The base image for services was changed from Ubuntu Quantal 12.10 to Debian Jessie.
 
 FEATURES:

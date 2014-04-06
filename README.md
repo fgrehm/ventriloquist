@@ -114,8 +114,9 @@ PostgreSQL will involve installing the `postgresql-client` package and adding an
 `export PGHOST=localhost` to the guest's `/etc/profiles.d/ventriloquist.sh` so that
 the `psql` client works without any extra params.
 
-Please note that all of the builtin images are available on the [Docker index](https://index.docker.io/)
-with the `fgrehm/ventriloquist-` prefix that is ommited on the table above.
+Please note that all of the builtin images are available as trusted builds on the
+[Docker index](https://index.docker.io/) with the `fgrehm/ventriloquist-` prefix
+that is ommited on the table above.
 
 For fine grained control over how Ventriloquist runs images:
 
