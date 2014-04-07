@@ -2,11 +2,14 @@
 
 FROM fgrehm/ventriloquist-base
 
-# prevent apt from starting postgres right after the installation
-RUN echo "#!/bin/sh\nexit 101" > /usr/sbin/policy-rc.d; chmod +x /usr/sbin/policy-rc.d && \
-    apt-get install -y -q postgresql-9.1 postgresql-contrib-9.1 && \
-    apt-get clean && \
-    rm /usr/sbin/policy-rc.d # allow autostart again
+RUN wget --quiet -O - http://apt.postgresql.org/pub/repos/apt/ACCC4CF8.asc | apt-key add - && \
+    echo "deb http://apt.postgresql.org/pub/repos/apt sid-pgdg main" > /etc/apt/sources.list.d/pgdg.list && \
+    apt-get update && \
+    apt-get install -y postgresql-9.1 postgresql-contrib-9.1 && \
+    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /tmp/* && \
+    apt-get autoremove && \
+    apt-get clean
 
 ADD config /
 RUN /bin/prepare-postgres vagrant vagrant

@@ -1,4 +1,32 @@
-## [0.4.2](https://github.com/fgrehm/ventriloquist/compare/v0.4.1...master) (unreleased)
+## [0.5.0](https://github.com/fgrehm/ventriloquist/compare/v0.4.1...v0.5.0) (Apr 06, 2014)
+
+BACKWARDS INCOMPATIBILITY:
+
+  - Support for Vagrant < 1.5 has been removed, please try to use a previous plugin
+    version if you can't upgrade.
+  - Services / platforms versions are now required to be specified from Vagrantfile
+    to increase reproducibility / reduce the chances of surprises and simplify plugin
+    maintenance.
+  - _All_ of the services images have been rebuilt from scratch and are now
+    trusted builds.
+  - The base image for services was changed from Ubuntu Quantal 12.10 to Debian Jessie.
+
+FEATURES:
+
+  - Added shortcut for installing multiple ruby / nodejs / python versions from `Vagrantfile`
+
+IMPROVEMENTS:
+
+  - core: Bumped docker to 0.9.1
+  - core: Removed dependency on [vocker]
+  - core: Simplified usage with vagrant-lxc
+  - platforms: Improved handling of multiple versions specifications
+  - platforms: Show message when already installed instead of keeping silent
+  - platforms/phantomjs: Leverage vagrant-cachier on installation
+  - platforms/phantomjs: Fix installation of recent versions
+  - platforms/go: Leverage vagrant-cachier on installation
+  - platforms/elixir: Fix installation of recent versions
+  - services/postgres: Rename ventriloquist-pg images to ventriloquist-postgres
 
 
 ## [0.4.1](https://github.com/fgrehm/ventriloquist/compare/v0.4.0...v0.4.1) (December 13, 2013)

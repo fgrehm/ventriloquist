@@ -1,24 +1,22 @@
 require 'spec_helper'
 
-require 'vocker/docker_client'
+require Vagrant.source_root.join('plugins/provisioners/docker/client')
 require 'ventriloquist/services_builder'
 
 describe VagrantPlugins::Ventriloquist::ServicesBuilder do
   Service = VagrantPlugins::Ventriloquist::Service
 
-  verify_contract(:services_builder)
+  let(:docker_client) { instance_double(VagrantPlugins::Docker::Client, container_running?: false, run_container: false) }
 
-  fake(:docker_client)
-
-  let(:pg_cfg)       { {image: 'user/pg', tag: '9.2'} }
+  let(:pg_cfg)       { {image: 'user/pg-9.2'} }
   let(:custom_mapping) { {'mysql' => custom_service} }
   let(:custom_service) { Class.new(Service) }
   let(:svcs_configs) { [
     {pg: pg_cfg},
     ['some-service'],
-    'mysql:1.2',
+    'mysql-1.2',
     {name: {type: 'mysql'}},
-    {api_db: {vimage: 'mysql'}}
+    {api_db: {vimage: 'mysql-2.1'}}
   ] }
 
   let(:services)  { described_class.new(svcs_configs, custom_mapping).build(docker_client) }
@@ -29,8 +27,8 @@ describe VagrantPlugins::Ventriloquist::ServicesBuilder do
   let(:vimage_ex) { services[4] }
 
   it 'builds a list of service objects' do
-    expect(services).to have(5).items
-    expect(services.all?{|s| s.is_a?(Service)}).to be_true
+    expect(services.size).to eq(5)
+    expect(services.all?{|s| s.is_a?(Service)}).to be_truthy
   end
 
   it 'uses container name as type' do
@@ -49,24 +47,16 @@ describe VagrantPlugins::Ventriloquist::ServicesBuilder do
     expect(pg.config).to eq(pg_cfg)
   end
 
-  it 'extracts tag from image name' do
-    expect(mysql.config[:tag]).to eq('1.2')
-  end
-
-  it 'defaults tag to "latest"' do
-    expect(other.config[:tag]).to eq('latest')
-  end
-
   it 'prepends "fgrehm/ventriloquist-" to image names if image config is not provided' do
-    expect(mysql.config[:image]).to eq('fgrehm/ventriloquist-mysql:1.2')
+    expect(mysql.config[:image]).to eq('fgrehm/ventriloquist-mysql-1.2')
   end
 
   it 'expands vimage' do
-    expect(vimage_ex.config[:image]).to eq('fgrehm/ventriloquist-mysql:latest')
+    expect(vimage_ex.config[:image]).to eq('fgrehm/ventriloquist-mysql-2.1')
   end
 
   it 'sets the service name' do
     expect(pg.name).to eq('pg')
-    expect(mysql.name).to eq('mysql')
+    expect(mysql.name).to eq('mysql-1.2')
   end
 end

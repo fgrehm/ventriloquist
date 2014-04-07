@@ -3,31 +3,38 @@ module VagrantPlugins
     module Cap
       module Debian
         module ElixirInstall
-          ELIXIR_PRECOMPILED = "https://github.com/elixir-lang/elixir/releases/download/vVERSION/vVERSION.zip"
+          ELIXIR_PRECOMPILED_1 = "https://github.com/elixir-lang/elixir/releases/download/vVERSION/Precompiled.zip"
+          ELIXIR_PRECOMPILED_2 = "https://github.com/elixir-lang/elixir/releases/download/vVERSION/vVERSION.zip"
 
           def self.elixir_install(machine,version)
             @version = version
 
             machine.communicate.tap do |comm|
-              if ! comm.test('which iex > /dev/null')
-                bin_path = "/usr/local/elixir/bin"
-                ELIXIR_PRECOMPILED.gsub!(/VERSION/,@version)
+              if comm.test('which iex > /dev/null')
+                machine.env.ui.info("Skipping Elixir installation")
+                return
+              end
 
-                machine.env.ui.info("Installing Elixir #{@version}")
+              bin_path = "/usr/local/elixir/bin"
+              srcs = [
+                ELIXIR_PRECOMPILED_1.gsub(/VERSION/, @version),
+                ELIXIR_PRECOMPILED_2.gsub(/VERSION/, @version)
+              ]
 
-                path = download_path(comm)
+              machine.env.ui.info("Installing Elixir #{@version}")
 
-                unless comm.test("test -f #{path}")
-                  machine.guest.capability(:download, ELIXIR_PRECOMPILED, path)
-                end
+              path = download_path(comm)
 
-                # TODO: Create unzip capability
-                comm.sudo('apt-get install -y unzip')
-                comm.sudo("unzip -o #{path} -d /usr/local/elixir")
+              unless comm.test("test -f #{path}")
+                machine.guest.capability(:download, srcs, path)
+              end
 
-                if ! comm.test("grep -q '#{bin_path}' /etc/profile.d/ventriloquist.sh 2>/dev/null")
-                  comm.sudo("echo 'export PATH=$PATH:#{bin_path}' >> /etc/profile.d/ventriloquist.sh")
-                end
+              # TODO: Create unzip capability
+              comm.sudo('apt-get install -y unzip')
+              comm.sudo("unzip -o #{path} -d /usr/local/elixir")
+
+              if ! comm.test("grep -q '#{bin_path}' /etc/profile.d/ventriloquist.sh 2>/dev/null")
+                comm.sudo("echo 'export PATH=$PATH:#{bin_path}' >> /etc/profile.d/ventriloquist.sh")
               end
             end
           end
@@ -35,7 +42,7 @@ module VagrantPlugins
           private
 
           def self.download_path(comm)
-            # If vagrant-cachier apt cache bucket is available, drop it there
+            # If vagrant-cachier cache bucket are available, drop it there
             if comm.test("test -d /tmp/vagrant-cache")
               "/tmp/vagrant-cache/elixir-v#{@version}.zip"
             else

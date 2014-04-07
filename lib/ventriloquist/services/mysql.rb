@@ -4,7 +4,7 @@ module VagrantPlugins
       class MySql < Service
         def initialize(*args)
           super
-          @config[:ports] ||= ['3306:3306']
+          @config[:args] ||= '-p 3306:3306'
         end
 
         def provision(machine)

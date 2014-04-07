@@ -3,18 +3,16 @@ if ENV['COVERAGE'] == 'true'
   SimpleCov.start
 end
 
-require 'bogus/rspec'
-
+require 'vagrant'
 require 'ventriloquist'
 
-Bogus.configure do |c|
-  c.search_modules << VagrantPlugins::Ventriloquist
-  c.search_modules << VagrantPlugins::Vocker
-  c.search_modules << Vagrant
-end
-
 RSpec.configure do |config|
-  config.treat_symbols_as_metadata_keys_with_true_values = true
+  config.mock_with :rspec do |mocks|
+    mocks.syntax = :expect
+    mocks.verify_partial_doubles = true
+    mocks.verify_doubled_constant_names = true
+  end
+
   config.run_all_when_everything_filtered = true
   config.filter_run :focus
 

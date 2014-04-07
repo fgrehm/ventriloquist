@@ -4,7 +4,7 @@ module VagrantPlugins
       class Redis < Service
         def initialize(*args)
           super
-          @config[:ports] ||= ['6379:6379']
+          @config[:args] ||= '-p 6379:6379'
         end
 
         def provision(machine)
@@ -17,7 +17,7 @@ module VagrantPlugins
         def install_client(machine)
           return if machine.communicate.test('which redis-cli > /dev/null')
 
-          redis_version = '2.8.2'
+          redis_version = '2.8.8'
           machine.guest.tap do |guest|
             guest.capability(:install_build_tools)
             # TODO: Use the same version specified on the Vagrantfile

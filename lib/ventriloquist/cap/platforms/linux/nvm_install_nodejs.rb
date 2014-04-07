@@ -8,6 +8,8 @@ module VagrantPlugins
               machine.env.ui.info("Installing NodeJS #{version}")
               machine.communicate.execute("nvm install #{version}")
               machine.communicate.execute("nvm alias default #{version}")
+            else
+              machine.env.ui.info("Skipping NodeJS '#{version}' installation")
             end
           end
         end

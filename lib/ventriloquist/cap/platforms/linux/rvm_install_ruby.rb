@@ -8,6 +8,8 @@ module VagrantPlugins
               machine.env.ui.info("Installing Ruby #{version}")
               machine.communicate.sudo("rvm install #{version}")
               machine.guest.capability(:install_packages, 'libxslt1-dev', silent: true)
+            else
+              machine.env.ui.info("Skipping Ruby #{version} installation")
             end
           end
         end

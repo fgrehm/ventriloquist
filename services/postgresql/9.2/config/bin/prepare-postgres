@@ -5,6 +5,8 @@ set -e
 user=$1
 password=$2
 
+sed -i 's/^\(lc_.*\)$/# \1/g' /etc/postgresql/9.2/main/postgresql.conf
+
 /etc/init.d/postgresql start
 
 su postgres -c "createuser --superuser ${user}"

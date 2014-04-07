@@ -3,9 +3,16 @@
 
 FROM fgrehm/ventriloquist-base
 
-RUN add-apt-repository ppa:rethinkdb/ppa && \
+RUN wget http://blog.anantshri.info/content/uploads/2010/09/add-apt-repository.sh.txt -O /tmp/add-apt-repository.sh.txt && \
+    mv /tmp/add-apt-repository.sh.txt /usr/sbin/add-apt-repository && \
+    chmod o+x /usr/sbin/add-apt-repository && \
+    chown root:root /usr/sbin/add-apt-repository && \
+    add-apt-repository ppa:rethinkdb/ppa && \
     apt-get update && \
     apt-get install -y rethinkdb && \
+    rm -rf /var/lib/apt/lists/* && \
+    rm -rf /tmp/* && \
+    apt-get autoremove && \
     apt-get clean
 
 # create the /rethinkdb_data dir structure

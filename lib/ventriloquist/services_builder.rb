@@ -11,7 +11,7 @@ module VagrantPlugins
   module Ventriloquist
     class ServicesBuilder
       MAPPING = {
-        'pg'            => Services::PostgreSQL,
+        'postgres'      => Services::PostgreSQL,
         'elasticsearch' => Services::ElasticSearch,
         'mailcatcher'   => Services::MailCatcher,
         'mysql'         => Services::MySql,
@@ -51,24 +51,27 @@ module VagrantPlugins
       end
 
       def create_service_provisioner(name, config, docker_client)
-        name, tag = name.to_s.split(':')
-        type      = config.delete(:type) || name
+        type = extract_service_type(config.delete(:type) || name)
 
-        # REFACTOR: This is a bit confusing...
-        config[:tag]   ||= (tag || 'latest')
         config[:image] ||= extract_image_name(config.delete(:vimage) || name)
-        config[:image] << ":#{config[:tag]}"
 
         klass = @mapping.fetch(type, Service)
-        klass.new(name, config, docker_client)
+        klass.new(name.to_s, config, docker_client)
       end
 
       def extract_image_name(name)
         if name =~ /(\w+\/\w+)/
           $1
+        # HACK: This should be noted on the README
+        elsif name =~ /^elasticsearch-(\d+\.\d+)$/
+          "fgrehm/ventriloquist-es-#{$1}"
         else
           "fgrehm/ventriloquist-#{name}"
         end
+      end
+
+      def extract_service_type(type)
+        type.to_s.split('-').first
       end
     end
   end

@@ -7,7 +7,7 @@ module VagrantPlugins
             machine.communicate.tap do |comm|
               if ! comm.test('test -f /etc/init/ventriloquist.conf')
                 machine.env.ui.info('Configuring Ventriloquist services upstart')
-                machine.communicate.sudo '
+                comm.sudo '
 cat<<EOF > /etc/init/ventriloquist.conf
 description "Restart configured Ventriloquist services after reboot"
 

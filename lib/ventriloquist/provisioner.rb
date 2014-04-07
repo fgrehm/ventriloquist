@@ -1,5 +1,5 @@
-require "vocker/docker_client"
-require "vocker/docker_installer"
+require Vagrant.source_root.join("plugins/provisioners/docker/client")
+require Vagrant.source_root.join("plugins/provisioners/docker/installer")
 
 require_relative "errors"
 require_relative "services_builder"
@@ -12,8 +12,8 @@ module VagrantPlugins
     class Provisioner < Vagrant.plugin("2", :provisioner)
       def initialize(machine, config, installer = nil, client = nil)
         super(machine, config)
-        @installer = installer || Vocker::DockerInstaller.new(@machine, config.docker_version)
-        @client    = client    || Vocker::DockerClient.new(@machine)
+        @installer = installer || Docker::Installer.new(@machine, config.docker_version)
+        @client    = client    || Docker::Client.new(@machine)
       end
 
       def provision
@@ -46,8 +46,13 @@ module VagrantPlugins
           @machine.guest.capability(:ventriloquist_containers_upstart)
         end
 
+        if @machine.provider_name == :lxc && @machine.guest.capability?(:prepare_container_for_docker)
+          @logger.info("vagrant-lxc container detected, will install lxc and tweak Docker settings")
+          @machine.guest.capability(:prepare_container_for_docker)
+        end
+
         unless @client.daemon_running?
-          raise Vocker::Errors::DockerNotRunning
+          raise 'Docker client is not running'
         end
 
         ServicesBuilder.build(config.services, @client).each do |service|
