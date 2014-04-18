@@ -157,7 +157,7 @@ _See http://docs.vagrantup.com/v2/provisioning/docker.html for other arguments_
 | go        | Downloads from https://code.google.com/p/go/downloads/list |
 | nodejs    | Uses nvm for installing node versions |
 | phantomjs | Downloads from https://bitbucket.org/ariya/phantomjs/downloads or https://code.google.com/p/phantomjs/downloads/list |
-| erlang    | The latest version available at https://packages.erlang-solutions.com/erlang/ (currently R16B03-1) |
+| erlang    | The latest version available at https://packages.erlang-solutions.com/erlang/ (currently 17.0) |
 | elixir    | Downloads from https://github.com/elixir-lang/elixir/releases |
 | python    | Uses pyenv for installing python versions |
 
