@@ -6,7 +6,7 @@ module VagrantPlugins
           def self.nvm_install(machine)
             if ! machine.communicate.test('test -d $HOME/.nvm')
               machine.env.ui.info('Installing NVM')
-              machine.communicate.execute('\curl https://raw.github.com/creationix/nvm/master/install.sh | sh')
+              machine.communicate.execute('\curl -L https://github.com/creationix/nvm/raw/master/install.sh | sh')
             end
           end
         end
