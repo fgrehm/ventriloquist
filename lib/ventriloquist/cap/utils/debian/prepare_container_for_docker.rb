@@ -24,7 +24,7 @@ apt-get install -y --force-yes lxc \
 cat <<STR >> /etc/default/docker
 DOCKER_OPTS="-e lxc ${DOCKER_OPTS}"
 STR
-service docker restart'
+service docker restart && sleep 5'
               end
             end
           end
