@@ -1,3 +1,11 @@
+## [0.5.1](https://github.com/fgrehm/ventriloquist/compare/v0.5.0...v0.5.1) (May 03, 2014)
+
+BUG FIXES:
+
+  - Fix nodejs installation
+  - Improve usage with vagrant-lxc containers
+
+
 ## [0.5.0](https://github.com/fgrehm/ventriloquist/compare/v0.4.1...v0.5.0) (Apr 06, 2014)
 
 BACKWARDS INCOMPATIBILITY:
