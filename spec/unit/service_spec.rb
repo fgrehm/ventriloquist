@@ -6,7 +6,7 @@ require Vagrant.source_root.join('plugins/provisioners/docker/client')
 require 'ventriloquist/service'
 
 describe VagrantPlugins::Ventriloquist::Service do
-  let(:docker_client) { instance_double(VagrantPlugins::Docker::Client, container_running?: false, run_container: false) }
+  let(:docker_client) { instance_double(VagrantPlugins::DockerProvisioner::Client, container_running?: false, run_container: false) }
   let(:communicator)  { instance_double(VagrantPlugins::CommunicatorSSH::Communicator, sudo: true) }
   let(:ui)            { instance_double(Vagrant::UI::Interface, info: true) }
   let(:env)           { instance_double(Vagrant::Environment, ui: ui) }
@@ -39,7 +39,7 @@ describe VagrantPlugins::Ventriloquist::Service do
   end
 
   context 'given the container has already been created' do
-    let(:docker_client) { double(VagrantPlugins::Docker::Client, container_running?: true, run_container: true) }
+    let(:docker_client) { double(VagrantPlugins::DockerProvisioner::Client, container_running?: true, run_container: true) }
 
     it 'does not attempt to run container' do
       expect(docker_client).to_not have_received(:run_container)

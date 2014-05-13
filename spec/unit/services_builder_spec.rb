@@ -6,7 +6,7 @@ require 'ventriloquist/services_builder'
 describe VagrantPlugins::Ventriloquist::ServicesBuilder do
   Service = VagrantPlugins::Ventriloquist::Service
 
-  let(:docker_client) { instance_double(VagrantPlugins::Docker::Client, container_running?: false, run_container: false) }
+  let(:docker_client) { instance_double(VagrantPlugins::DockerProvisioner::Client, container_running?: false, run_container: false) }
 
   let(:pg_cfg)       { {image: 'user/pg-9.2'} }
   let(:custom_mapping) { {'mysql' => custom_service} }
