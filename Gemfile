@@ -14,7 +14,7 @@ end
 
 group :development, :test do
   gem 'rake'
-  gem 'vagrant', github: 'mitchellh/vagrant', tag: 'v1.5.2'
+  gem 'vagrant', github: 'mitchellh/vagrant', tag: 'v1.6.2'
   gem 'rspec', '3.0.0.beta2'
   gem 'simplecov', require: false
 end

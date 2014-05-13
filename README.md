@@ -44,7 +44,7 @@ end
 
 ## Installation
 
-Make sure you have Vagrant 1.5+ and run:
+Make sure you have Vagrant 1.6+ and run:
 
 ```
 vagrant plugin install ventriloquist

@@ -1,3 +1,11 @@
+## [0.6.0](https://github.com/fgrehm/ventriloquist/compare/v0.5.1...v0.6.0) (May 13, 2014)
+
+BACKWARDS INCOMPATIBILITY:
+
+  - Support for Vagrant < 1.6 has been removed, please try to use a previous plugin
+    version if you can't upgrade.
+
+
 ## [0.5.1](https://github.com/fgrehm/ventriloquist/compare/v0.5.0...v0.5.1) (May 03, 2014)
 
 BUG FIXES:
