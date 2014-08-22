@@ -31,6 +31,10 @@ Vagrant.configure("2") do |config|
 end
 ```
 
+## :warning: This project is not being actively maintained :warning:
+
+More information on https://github.com/fgrehm/ventriloquist/issues/63
+
 
 ## Project Goals
 
